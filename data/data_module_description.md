@@ -26,7 +26,12 @@ Ce module garantit la traçabilité, l’auditabilité et la transmission des in
 - **labels.json** → Labels associés aux signaux.
 
 ### geo/
-- **maps/** → Cartes de référence.
+- **maps/** → Cartes et profils géographiques.
+  - **base_map.geojson** → Carte de référence globale.
+  - **terrain_profiles.json** → Profils terrains (altitude, zones).
+  - **coverage_zones.yaml** → Zones de couverture SDR.
+  - **restricted_areas.json** → Zones interdites / sensibles.
+  - **map_index.md** → Documentation indexée.
 - **geo_profiles.json** → Profils géographiques.
 - **triangulation_samples.csv** → Données pour fusion géographique.
 
@@ -34,6 +39,11 @@ Ce module garantit la traçabilité, l’auditabilité et la transmission des in
 - **compliance_logs.json** → Journaux de conformité.
 - **audit_samples.json** → Exemples de flux audités.
 - **export_templates/** → Modèles d’exports auditeurs.
+  - **audit_report_template.md** → Modèle de rapport auditeur.
+  - **compliance_export.json** → Modèle export conformité.
+  - **signal_log_template.csv** → Modèle journal des signaux.
+  - **geo_export_template.yaml** → Modèle export données géographiques.
+  - **export_index.md** → Documentation indexée.
 
 ---
 
@@ -42,17 +52,17 @@ Ce module garantit la traçabilité, l’auditabilité et la transmission des in
 - **samples_iq/** → fournit des échantillons IQ pour tester le pipeline DSP (FFT, filtrage, spectrogrammes).  
 - **signatures/** → base de signatures radar et protocoles pour classification et reconnaissance.  
 - **datasets/** → jeux de données enrichis pour entraînement et validation des moteurs de classification.  
-- **geo/** → données géographiques pour triangulation et cartographie des émetteurs.  
-- **audit_data/** → données de conformité et exemples d’exports pour auditeurs.  
+- **geo/maps/** → cartes et profils géographiques pour triangulation et audit.  
+- **audit_data/export_templates/** → modèles standardisés pour exports auditeurs et conformité institutionnelle.  
 
 ---
 
 ## 🏛️ Valeur institutionnelle
 
 - **Traçabilité** : chaque échantillon et signature est documenté et indexé.  
-- **Auditabilité** : données de conformité prêtes pour validation externe.  
+- **Auditabilité** : données de conformité et modèles d’exports prêts pour validation externe.  
 - **Transmission** : documentation claire pour adoption continentale.  
-- **Plug‑and‑Play** : les échantillons IQ permettent de tester immédiatement le système sans matériel.  
+- **Plug‑and‑Play institutionnel** : les échantillons IQ et modèles d’exports permettent de tester et transmettre immédiatement.  
 
 ---
 
