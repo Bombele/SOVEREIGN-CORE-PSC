@@ -28,6 +28,9 @@ Il regroupe les manuels, guides, rapports et notes de conception, afin d’assur
 - **ui_design_notes.md** → Notes conception UI.
 - **data_flow_notes.md** → Notes flux de données.
 
+### changelog/
+- **changelog.md** → Registre des versions et historique documentaire.
+
 ### docs_index.md
 - Documentation indexée du module.
 
@@ -39,6 +42,7 @@ Il regroupe les manuels, guides, rapports et notes de conception, afin d’assur
 - **guides/** → guides pratiques pour déploiement, audit et dépannage.  
 - **reports/** → rapports institutionnels (conformité, performance, mission).  
 - **design_notes/** → notes de conception et architecture technique.  
+- **changelog/** → registre des versions, assurant traçabilité et continuité documentaire.  
 - **docs_index.md** → index global pour auditeurs et partenaires.  
 
 ---
@@ -48,8 +52,8 @@ Il regroupe les manuels, guides, rapports et notes de conception, afin d’assur
 - **Transmission** : documentation claire pour adoption continentale.  
 - **Auditabilité** : rapports conformité et performance prêts pour certification.  
 - **Crédibilité** : manuels et guides validés pour opérateurs et administrateurs.  
-- **Traçabilité** : notes de conception et index garantissent continuité documentaire.  
+- **Traçabilité** : registre des versions (`changelog/`) garantit suivi et continuité documentaire.  
 
 ---
 
-✅ Avec ce module `docs/`, ton système SIGINT dispose d’un **référentiel documentaire complet**, garantissant que chaque aspect est expliqué, transmissible et certifiable.
+✅ Avec ce module `docs/`, ton système SIGINT dispose d’un **référentiel documentaire complet et traçable**, garantissant que chaque aspect est expliqué, transmissible, auditable et certifiable.
