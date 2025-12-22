@@ -1,57 +1,60 @@
 # Description du module Infra
 
-Le module `infra/` fournit les capacités de déploiement, de sécurité et de traçabilité pour le système SIGINT.  
-Il garantit que le logiciel peut être empaqueté, orchestré, signé et audité dans des environnements institutionnels.
+Le module `infra/` regroupe les éléments d’infrastructure nécessaires au déploiement, à la sécurité et à la traçabilité du système SIGINT.  
+Il couvre la conteneurisation, l’orchestration, les pipelines CI/CD, les signatures et SBOM, ainsi que la cyber‑résilience.  
+Ce module garantit que le système est déployé de manière sécurisée, reproductible et certifiable.
 
 ---
 
 ## 📂 Structure
 
 ### docker/
-- **Dockerfile** → Définition de l’image de base (runtime + dépendances).
-- **docker-compose.yaml** → Orchestration locale multi-services.
-- **entrypoint.sh** → Script d’initialisation du conteneur.
+- Conteneurisation des services et modules.
+- Documentation des images et configurations.
 
 ### k8s/
-- **deployment.yaml** → Déploiement Kubernetes des pods (services COMINT/ELINT/FISINT).
-- **service.yaml** → Exposition des services (gateway, sync, audit).
-- **ingress.yaml** → Routage externe pour les interfaces analyste et auditeur.
-- **configmap.yaml** → Paramètres de mission et profils.
-
-### cosign/
-- **cosign.pub** → Clé publique pour la vérification des signatures.
-- **cosign.key** → Clé privée pour la signature (sécurisée).
-- **sign.sh** → Script de signature des images conteneurs.
-
-### sbom/
-- **sbom.json** → Software Bill of Materials (liste des composants).
-- **sbom.spdx** → Format SPDX pour conformité internationale.
-- **generate_sbom.sh** → Script de génération des fichiers SBOM.
+- Orchestration Kubernetes.
+- Déploiement scalable et résilient.
 
 ### ci_cd/
-- **pipeline.yaml** → Pipeline CI/CD (tests, build, déploiement).
-- **security_scan.yaml** → Scan de sécurité pour images et dépendances.
-- **compliance_check.yaml** → Vérification de conformité légale et institutionnelle.
+- Pipelines CI/CD.
+- Automatisation des builds, tests et déploiements.
+
+### cosign/
+- Signatures Cosign et SBOM.
+- Vérification de l’intégrité et traçabilité des artefacts.
+
+### cyber_resilience/
+- **threat_model.md** → Modèle de menaces et analyse des risques.  
+- **incident_response.md** → Procédures institutionnelles de réponse aux incidents.  
+- **recovery_plan.md** → Plan de reprise et continuité opérationnelle.  
+- **resilience_tests.md** → Tests de robustesse et simulations d’attaque.  
+- **cyber_index.md** → Index global du sous‑dossier.  
+
+### infra_index.md
+- Documentation globale du module.
 
 ---
 
 ## 🎯 Description des sous‑modules
 
-- **docker/** → conteneurisation pour déploiement rapide et portable.  
-- **k8s/** → orchestration Kubernetes pour déploiement distribué et scalable.  
-- **cosign/** → signature cryptographique des images pour garantir intégrité et authenticité.  
-- **sbom/** → traçabilité logicielle (liste des composants, dépendances, versions).  
-- **ci_cd/** → pipelines automatisés pour tests, sécurité et conformité.  
+- **docker/** → conteneurisation des services.  
+- **k8s/** → orchestration et déploiement scalable.  
+- **ci_cd/** → pipelines CI/CD pour automatisation.  
+- **cosign/** → signatures et SBOM pour traçabilité.  
+- **cyber_resilience/** → sécurité avancée et résilience institutionnelle.  
+- **infra_index.md** → documentation globale du module.  
 
 ---
 
 ## 🏛️ Valeur institutionnelle
 
-- **Crédibilité** : signatures Cosign + SBOM = conformité internationale.  
-- **Scalabilité** : Kubernetes permet de gérer plusieurs SDR et modules en parallèle.  
-- **Auditabilité** : CI/CD + compliance check garantissent que chaque build est validé.  
-- **Plug‑and‑Play institutionnel** : Docker Compose pour déploiement rapide sur terrain.  
+- **Sécurité** : déploiement certifiable et vérifiable.  
+- **Traçabilité** : signatures et SBOM garantissent intégrité des artefacts.  
+- **Automatisation** : CI/CD assure reproductibilité et efficacité.  
+- **Résilience** : cyber_resilience/ anticipe menaces, incidents et garantit continuité.  
+- **Certification** : démontre conformité aux normes de sécurité et résilience.  
 
 ---
 
-✅ Avec ce module `infra/`, ton logiciel SIGINT est prêt pour déploiement institutionnel : portable, sécurisé, traçable et conforme.
+✅ Avec ce module `infra/`, le système SIGINT dispose d’une **infrastructure complète et institutionnelle**, intégrant sécurité avancée, traçabilité et résilience.
