@@ -8,7 +8,7 @@ Il constitue une vue globale et homogène, garantissant transmission, auditabili
 ## 📂 Modules
 
 ### infra/
-- **Rôle** : déploiement, sécurité, traçabilité (Docker, K8s, Cosign, SBOM, CI/CD).
+- **Rôle** : déploiement, sécurité, traçabilité (Docker, K8s, Cosign, SBOM, CI/CD, cyber_resilience).
 - **Valeur institutionnelle** : assure que le système est déployé de manière sécurisée et certifiable.
 
 ### services/
