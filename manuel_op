@@ -1,0 +1,75 @@
+
+
+---
+
+📘 Manuel Opérationnel – Combat-Ready System SIGINT
+
+1. Introduction
+- Objectif : fournir un système SIGINT/ELINT combat-ready, modulaire, auditable et certifiable.  
+- Contexte : conçu pour une unité mobile de guerre électronique, avec résilience en conditions dégradées.  
+- Valeur stratégique : souveraineté nationale, transmission institutionnelle, alignement avec normes OTAN/ITU.  
+
+---
+
+2. Architecture générale
+- Modules principaux :
+  - core/ : moteur central, gestion des flux et sécurité.  
+  - sigint/ : capture, classification et géolocalisation des signaux.  
+  - infra/ : transmission sécurisée, fallback multi-canal.  
+  - specs/ : documentation technique et conformité.  
+  - docs/ : SOP, manuels opérateurs, matrices de certification.  
+
+- Flux opérationnel :
+  1. Capture radio (RTL-SDR, HackRF).  
+  2. Classification IA embarquée (TFLite).  
+  3. Géolocalisation (TDOA/AoA).  
+  4. Transmission sécurisée (mesh, SMS chiffré, HF analogique).  
+  5. Audit et documentation automatique.  
+
+---
+
+3. Procédures Opérationnelles (SOP)
+- Mise en route :
+  - Vérifier matériel (SDR, antennes, batteries).  
+  - Initialiser core/ et charger clés ZeroTrust.  
+- Capture et classification :
+  - Lancer module sigint/.  
+  - IA embarquée identifie type de signal (militaire, civil, anomalie).  
+- Transmission :
+  - Priorité : réseau mesh sécurisé.  
+  - Fallback : SMS chiffré ou HF analogique.  
+- Sécurité :
+  - Activer PanicHandler en cas de compromission.  
+  - GeofenceManager efface clés hors zone autorisée.  
+
+---
+
+4. Sécurité et Résilience
+- ZeroTrustManager : chiffrement bout-en-bout.  
+- PanicHandler : autodestruction en cas de capture.  
+- GeofenceManager : effacement automatique des clés hors zone.  
+- Cyber_resilience : redondance multi-canal et autodiagnostic.  
+
+---
+
+5. Intelligence Artificielle embarquée
+- Classification : TFLite pour identifier signaux.  
+- Détection anomalies : Isolation Forest / autoencoder.  
+- Usage : alerte opérateur en cas de signal suspect ou inconnu.  
+
+---
+
+6. Formation et Certification
+- Manuel opérateur : procédures simplifiées pour usage terrain.  
+- Compliance matrix : alignement avec normes OTAN/ITU.  
+- Certification : documentation prête pour audit institutionnel.  
+- Transmission : trilingue (FR/EN/ES) pour adoption continentale.  
+
+---
+
+7. Annexes
+- Glossaire : définitions des termes SIGINT/ELINT.  
+- Index système : system_index.md pour navigation rapide.  
+- Changelog : suivi des évolutions et mises à jour.  
+
+---
