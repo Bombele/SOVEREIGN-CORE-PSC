@@ -1,27 +1,76 @@
 package core.sync
 
-enum class Transport { WifiDirect, LoRa }
+import core.audit.MissionLogger
+import java.util.*
 
+/**
+ * Structure de donnée compacte pour l'échange de menaces SIGINT
+ */
 data class ThreatMessage(
-    val id: String,
-    val freqHz: Long,
-    val modulation: String,
-    val confidence: Double,
-    val timestamp: Long
-    // TODO: CBOR serialization
+    val id: String = UUID.randomUUID().toString(),
+    val type: String,        // ex: "MOTOROLA_DMR", "THURAYA_SAT"
+    val frequency: Double,   // MHz
+    val latitude: Double,
+    val longitude: Double,
+    val priority: Int,       // 1 (Haut) à 3 (Bas)
+    val timestamp: Long = System.currentTimeMillis()
 )
 
-interface TransportAdapter {
-    fun start()
-    fun stop()
-    fun send(msg: ThreatMessage): Boolean
-    fun receive(handler: (ThreatMessage) -> Unit)
+/**
+ * SRC - MeshSyncEngine
+ * Gère la synchronisation Store-and-Forward entre unités SIGINT.
+ */
+object MeshSyncEngine {
+
+    // Cache local des menaces non encore synchronisées
+    private val localOutbox = mutableListOf<ThreatMessage>()
+    // Historique pour éviter les doublons
+    private val knownMessageIds = mutableSetOf<String>()
+
+    /**
+     * Ajoute une menace détectée par l'IA locale au cache de synchronisation
+     */
+    fun enqueueThreat(message: ThreatMessage) {
+        if (!knownMessageIds.contains(message.id)) {
+            localOutbox.add(message)
+            knownMessageIds.add(message.id)
+            MissionLogger.info("Threat enqueued for mesh sync: ${message.type} at ${message.frequency}MHz")
+        }
+    }
+
+    /**
+     * Fonction appelée lorsqu'un pair (autre soldat) est détecté via Wi-Fi Direct ou LoRa
+     */
+    fun onPeerDetected(adapter: TransportAdapter) {
+        MissionLogger.info("Mesh peer detected. Synchronizing...")
+        
+        // 1. Envoyer nos messages locaux (Priorité 1 d'abord)
+        localOutbox.sortedBy { it.priority }.forEach { msg ->
+            val success = adapter.send(msg)
+            if (success) {
+                // Optionnel : marquer comme envoyé
+            }
+        }
+
+        // 2. Recevoir les messages du pair
+        adapter.receive { remoteMsg ->
+            if (!knownMessageIds.contains(remoteMsg.id)) {
+                processIncomingThreat(remoteMsg)
+            }
+        }
+    }
+
+    private fun processIncomingThreat(msg: ThreatMessage) {
+        knownMessageIds.add(msg.id)
+        MissionLogger.warning("New threat received via Mesh: ${msg.type} from nearby unit")
+        // TODO: Mettre à jour la carte tactique (ui/map)
+    }
 }
 
-class MeshSyncEngine(
-    private val adapter: TransportAdapter
-) {
-    fun start(handler: (ThreatMessage) -> Unit) = adapter.start().also { adapter.receive(handler) }
-    fun stop() = adapter.stop()
-    fun share(threat: ThreatMessage): Boolean = adapter.send(threat)
+/**
+ * Interface pour les différents types de transport (Wi-Fi Direct, LoRa, Bluetooth)
+ */
+interface TransportAdapter {
+    fun send(msg: ThreatMessage): Boolean
+    fun receive(handler: (ThreatMessage) -> Unit)
 }
