@@ -74,3 +74,35 @@ interface TransportAdapter {
     fun send(msg: ThreatMessage): Boolean
     fun receive(handler: (ThreatMessage) -> Unit)
 }
+
+import java.util.PriorityQueue
+
+object MeshSyncEngine {
+    // Utilisation d'une PriorityQueue pour que la priorité 1 (CRITICAL) sorte toujours en premier
+    private val localOutbox = PriorityQueue<ThreatMessage> { m1, m2 -> m1.priority.compareTo(m2.priority) }
+    private val knownMessageIds = mutableSetOf<String>()
+
+    fun enqueueThreat(message: ThreatMessage) {
+        synchronized(this) {
+            if (!knownMessageIds.contains(message.id)) {
+                localOutbox.add(message)
+                knownMessageIds.add(message.id)
+                MissionLogger.info("Priority ${message.priority} threat enqueued.")
+            }
+        }
+    }
+
+    fun onPeerDetected(adapter: TransportAdapter) {
+        synchronized(this) {
+            while (localOutbox.isNotEmpty()) {
+                val msg = localOutbox.peek() // On regarde le plus prioritaire
+                if (adapter.send(msg)) {
+                    localOutbox.poll() // Succès : on le retire de la file
+                    MissionLogger.info("Sync success: ${msg.id}")
+                } else {
+                    break // Échec d'envoi (pair déconnecté), on garde le reste pour plus tard
+                }
+            }
+        }
+    }
+}
