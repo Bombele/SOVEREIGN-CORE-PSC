@@ -652,3 +652,36 @@ Ces modes de combat opérationnel assurent :
 - **Sécurité** : effacement automatique et traçabilité inviolable.  
 - **Interopérabilité** : communication maillée entre unités.  
 - **Innovation** : intégration de l’IA pour classification et détection proactive.
+
+## 🌐 Mode MeshSync – Protocole Threat Exchange
+
+### Objectif
+Le Mode MeshSync assure la continuité des communications entre unités SIGINT en l’absence d’infrastructure civile ou militaire.  
+Il repose sur un protocole d’échange opportuniste et compact, permettant aux patrouilles de partager automatiquement leurs découvertes (fréquences suspectes, positions ennemies, anomalies détectées) dès qu’elles se croisent sur le terrain.
+
+### Modules associés
+- **MeshSyncEngine.kt** : moteur central de synchronisation store‑and‑forward.  
+- **MessageEnvelope (CBOR)** : format binaire compact pour encapsuler les ThreatMessage.  
+- **TransportAdapter** : interface adaptable (Wi‑Fi Direct, LoRa, Bluetooth).  
+- **Cache local & déduplication** : stockage temporaire des menaces et suppression des doublons pour éviter la saturation.  
+
+### Procédures de fonctionnement
+1. **Détection de pair** : dès qu’un terminal voisin est détecté via Wi‑Fi Direct ou LoRa, la synchronisation démarre automatiquement.  
+2. **Diffusion priorisée** : les menaces CRITICAL sont transmises en premier, suivies des logs INFO.  
+3. **Store‑and‑forward** : les menaces détectées sont stockées localement et retransmises dès qu’une connexion est disponible.  
+4. **Déduplication** : chaque message est identifié par un UUID unique, évitant les boucles et doublons dans le réseau maillé.  
+
+### SOP associée
+- **docs/SOP/transmission_SOP.md** : décrit les procédures pour activer MeshSync, tester la diffusion opportuniste et valider la cohérence des données échangées.  
+
+### Valeur opérationnelle (FARDC)
+- **Résilience des communications** : continuité d’échange même en forêt ou en zone isolée.  
+- **Interopérabilité** : coordination multi‑unités sans dépendre d’un point central.  
+- **Réactivité tactique** : diffusion immédiate des menaces critiques à toutes les unités connectées.  
+- **Optimisation énergétique** : format binaire compact pour économiser batterie et temps de transmission.  
+- **Institutionnalisation** : protocole standardisé, intégré dans le manuel, prêt pour adoption officielle.  
+
+### Exemple de scénario
+- **Situation** : deux patrouilles SIGINT se croisent en forêt sans réseau civil.  
+- **Action** : MeshSync détecte automatiquement la présence d’un pair et échange les menaces stockées (fréquences suspectes, positions rebelles).  
+- **Résultat** : en quelques secondes, les deux unités disposent d’une base commune de menaces actualisée, renforçant leur coordination et leur efficacité.
