@@ -777,3 +777,78 @@ Il est conçu pour être scannable, modulaire et audit‑ready, réduisant les e
 - **Situation** : une unité SIGINT revient de mission et doit transférer son matériel à une autre patrouille.  
 - **Action** : l’opérateur exécute `make clean-logs` pour effacer les journaux, puis `make rotate-keys` pour générer de nouvelles clés.  
 - **Résultat** : le terminal est remis en état sécurisé, prêt pour une nouvelle mission, avec une intégrité vérifiée et une traçabilité garantie.
+
+## 🔗 Fusion BFT + SIGINT – Architecture intégrée
+
+### Objectif
+La fusion du système **BFT (Blue Force Tracking)** et du système **SIGINT combat‑ready** constitue l’ossature complète d’une unité mobile de guerre électronique.  
+Elle combine la conscience situationnelle interne (forces amies) et externe (spectre ennemi), permettant une coordination optimale et une supériorité décisionnelle.
+
+---
+
+### Différences fondamentales
+
+| Aspect              | BFT (Blue Force Tracking)                         | SIGINT combat‑ready system                          |
+|---------------------|---------------------------------------------------|----------------------------------------------------|
+| Mission principale  | Localiser et coordonner les forces amies.         | Intercepter, analyser et exploiter les signaux adverses. |
+| Nature des données  | Positions GPS, identifiants d’unités, messages.   | Flux radio, spectre électromagnétique, métadonnées. |
+| Finalité            | Conscience situationnelle interne.                | Renseignement et guerre électronique.              |
+| Approche technique  | Cartographie, transport résilient, chiffrement.   | Capture RF, analyse spectrale, brouillage.         |
+| Effet opérationnel  | Coordination et sécurité des troupes.             | Neutralisation des communications ennemies.        |
+| Compatibilité       | Radios civiles/militaires.                        | SDR, antennes, modules de brouillage.              |
+
+---
+
+### Articulation des deux systèmes
+- **BFT →** “Où sont nos forces ?”  
+- **SIGINT →** “Que fait l’ennemi dans le spectre ?”  
+- **Fusion →** Carte tactique enrichie :  
+  - Forces amies (BFT).  
+  - Menaces spectrales (SIGINT).  
+  - Zones brouillées et sources hostiles.  
+
+---
+
+### Architecture fusionnée
+
+#### 1. Niveau Terrain (Unités & Capteurs)
+- GPS & terminaux BFT → localisation des forces amies.  
+- Radios (LoRa, VHF/UHF, SATCOM) → transmission des données BFT.  
+- Antennes SDR → capture du spectre électromagnétique.  
+- Capteurs brouillage/détection → identification des menaces électroniques.  
+
+#### 2. Niveau Logiciel (Modules principaux)
+- **BFT Core** : positions, messages, cartographie hors‑ligne, chiffrement.  
+- **SIGINT Core** : capture RF, analyse spectrale, cartographie des menaces, brouillage défensif/offensif.  
+- **TransportAdapter** : abstraction des radios, bascule automatique, store‑and‑forward.  
+- **Security & Audit** : chiffrement bout‑en‑bout, rotation des clés, logs append‑only avec hash‑chain.  
+
+#### 3. Niveau Serveur (Commandement)
+- Agrégation des données BFT et SIGINT.  
+- Carte enrichie : forces amies + menaces spectrales.  
+- Redistribution en temps réel aux unités.  
+- Documentation certifiable pour audit institutionnel.  
+
+#### 4. Niveau Commandement (Décision)
+- Interface unique : carte tactique enrichie.  
+- Double conscience situationnelle :  
+  - Forces amies (BFT).  
+  - Menaces électroniques (SIGINT).  
+- Actions possibles : repositionnement, brouillage ciblé, contre‑mesures.  
+
+---
+
+### Valeur opérationnelle (FARDC)
+- **Coordination interne** : réduction du chaos, meilleure sécurité des troupes.  
+- **Supériorité externe** : interception et neutralisation des communications ennemies.  
+- **Fusion stratégique** : décisions basées sur une double conscience situationnelle.  
+- **Institutionnalisation** : architecture documentée et prête pour adoption officielle.  
+
+---
+
+### Vision finale
+Une unité mobile de guerre électronique équipée de ce système :  
+- Coordonne ses forces via BFT modulaire.  
+- Surveille et neutralise l’ennemi via SIGINT combat‑ready.  
+- Documente chaque action pour audit et certification.  
+- Fonctionne en tout terrain, avec radios civiles ou militaires.
