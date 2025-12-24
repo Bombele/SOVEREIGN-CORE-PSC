@@ -79,17 +79,16 @@ recette-elint:
 recette-sigint-full: recette-sigint recette-elint
 	@echo "🛡️  CHAÎNE SIGINT INTÉGRALE VALIDÉE"
 
-# 🚀 Recette SIGINT (FISINT - Télémétrie)
+# 🚀 Recette SIGINT (FISINT)
 recette-fisint:
 	@echo "=== [RECETTE SIGINT - FISINT] ==="
 	@kotlinc -d bin/ src/**/*.kt sigint/**/*.kt tests/*.kt
 	@java -cp bin sigint.fisint.tests.FisintTest
 	@echo "=== [RECETTE FISINT TERMINÉE] ==="
 
-# 🛡️ RECETTE TOTALE (COMINT + ELINT + FISINT)
-# La validation ultime avant le déploiement sur le terrain
+# 🔥 RECETTE SIGINT FULL (Le Triptyque)
 recette-sigint-full: recette-sigint recette-elint recette-fisint
 	@echo "=========================================================="
-	@echo "🔥 SPECTRE SIGINT 100% VALIDÉ : SYSTÈME COMBAT-READY 🔥"
+	@echo "🛡️  CHAÎNE ROEM 100% VALIDÉE : COMINT + ELINT + FISINT"
+	@echo "🚀 SYSTÈME SRC PRÊT POUR DÉPLOIEMENT SOUVERAIN"
 	@echo "=========================================================="
-
