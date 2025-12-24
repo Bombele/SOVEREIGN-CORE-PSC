@@ -1094,3 +1094,50 @@ Pour les FARDC, cela signifie passer d’une vision partielle à une **Conscienc
 - **Spectre maîtrisé** : brouillage sélectif, triangulation collaborative.  
 - **Sécurité nationale** : wipe unifié, auditabilité certifiable.  
 - **Institutionnalisation** : plateforme SENTINELLE documentée, prête pour adoption officielle.
+
+## 📡 GPSManager.kt – Capteur principal BFT & Sécurité
+
+### Objectif
+Le module **GPSManager.kt** fournit la position géographique de l’unité en temps réel.  
+Il alimente à la fois le **BFT (Blue Force Tracking)** pour la localisation des forces amies et le **TacticalWipeManager** pour la sécurité par geofencing.  
+Dans un contexte tactique, il est conçu pour être **résilient** face aux pertes de signal ou aux tentatives de manipulation (spoofing).
+
+---
+
+### Caractéristiques "Combat‑Ready"
+
+#### 1. Priorité à la sécurité
+- La position GPS est envoyée en priorité au **TacticalWipeManager**.  
+- Le système vérifie d’abord si l’unité a le droit d’exister dans la zone définie (geofence).  
+- **Effet** : évite toute compromission en cas de sortie de zone autorisée.
+
+#### 2. Résilience du signal
+- Si le signal satellite est perdu (tunnel, forêt dense), le GPSManager renvoie la **dernière position connue**.  
+- En cas de perte prolongée, il bascule en mode **Estime** (calcul de position approximative par inertie).  
+- **Effet** : évite un déclenchement erroné du Panic Wipe.
+
+#### 3. Filtrage d’incertitude
+- Détection des tentatives de **GPS Spoofing** (signaux falsifiés).  
+- Filtre d’accuracy et log des sauts incohérents.  
+- **Effet** : alerte l’opérateur et journalise toute anomalie.
+
+#### 4. Audit continu
+- Chaque fix GPS important est enregistré dans le **MissionLogger**.  
+- Permet de reconstruire précisément le trajet de l’unité après mission.  
+- **Valeur institutionnelle** : traçabilité certifiable pour débriefing et analyse du renseignement.
+
+---
+
+### Exemple de scénario
+- **Situation** : une unité traverse une forêt dense, le signal GPS est perdu.  
+- **Action** : le GPSManager renvoie la dernière position connue et bascule en mode Estime.  
+- **Résultat** : le TacticalWipeManager ne déclenche pas d’effacement erroné, et le MissionLogger conserve une trace fiable du trajet.  
+
+---
+
+### Valeur opérationnelle (FARDC)
+- **Sécurité renforcée** : priorité au geofencing pour éviter toute compromission.  
+- **Résilience tactique** : continuité de la localisation même en environnement hostile.  
+- **Détection proactive** : filtrage des signaux falsifiés pour contrer le spoofing.  
+- **Auditabilité** : reconstruction certifiable des trajets pour analyse post‑mission.  
+- **Institutionnalisation** : module documenté et intégré, prêt pour adoption officielle.
