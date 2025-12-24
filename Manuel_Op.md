@@ -852,3 +852,59 @@ Une unité mobile de guerre électronique équipée de ce système :
 - Surveille et neutralise l’ennemi via SIGINT combat‑ready.  
 - Documente chaque action pour audit et certification.  
 - Fonctionne en tout terrain, avec radios civiles ou militaires.
+
+## 🖇️ Common Operating Picture (COP) – UnifiedMessage
+
+### Objectif
+Le format **UnifiedMessage** est la pierre angulaire du Common Operating Picture (COP).  
+Il permet de synchroniser dans un flux unique les données issues du BFT (forces amies) et du SIGINT (menaces ennemies), garantissant une conscience situationnelle complète et partagée entre toutes les unités.
+
+---
+
+### Principes clés
+
+#### Indifférence au transport
+- Le **MeshSyncEngine** reçoit un UnifiedMessage sans distinction de type (position GPS ou fréquence radio).  
+- Il vérifie uniquement la **signature cryptographique**.  
+- Si le message est valide, il est relayé aux autres unités, indépendamment du canal utilisé (Wi‑Fi Direct, LoRa, SATCOM).
+
+#### Sécurité par compartimentage
+- Le **payload** est encapsulé sous forme de **ByteArray**.  
+- Chaque payload peut être chiffré indépendamment avec une clé de session.  
+- Même si une partie du système est compromise, les données brutes restent illisibles sans la clé appropriée.
+
+#### Auditabilité totale
+- Chaque message porte la **signature de son émetteur**.  
+- Le **MissionLogger** enregistre une trace certifiable et inviolable, par exemple :  
+  - *“L’unité ALPHA‑01 a signalé une menace DMR à 14h05”*.  
+- Cette traçabilité garantit la valeur probante des données pour débriefing et certification.
+
+---
+
+### Exemple d’utilisation – Fusion BFT + SIGINT
+
+1. **BFT Core** génère un UnifiedMessage contenant la position GPS d’une unité amie.  
+2. **SIGINT Core** génère un UnifiedMessage contenant une menace radio détectée (ex. DMR).  
+3. Les deux messages sont encapsulés, signés et transmis via MeshSyncEngine.  
+4. Les unités voisines reçoivent un flux unique où :  
+   - Les positions amies (BFT) et  
+   - Les menaces ennemies (SIGINT)  
+   sont synchronisées dans le même paquet.
+
+---
+
+### Résultat de la fusion
+- L’opérateur dispose désormais d’un **flux de données unifié**.  
+- La carte tactique affiche simultanément :  
+  - Les forces amies (BFT).  
+  - Les menaces spectrales (SIGINT).  
+- Le COP est ainsi concrétisé : une **vision commune**, partagée et certifiée, qui aligne toutes les unités sur la même réalité opérationnelle.
+
+---
+
+### Valeur opérationnelle (FARDC)
+- **Conscience situationnelle totale** : forces amies + menaces ennemies dans un flux unique.  
+- **Interopérabilité** : format standardisé, indépendant du transport.  
+- **Sécurité renforcée** : compartimentage et chiffrement des payloads.  
+- **Auditabilité** : chaque message signé et journalisé pour certification.  
+- **Institutionnalisation** : adoption du COP comme doctrine d’emploi officielle.
