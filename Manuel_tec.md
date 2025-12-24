@@ -197,3 +197,60 @@ recette:
 	@./test_mesh.sh || exit 1
 	@./test_cop.sh || exit 1
 	@echo "✅ Système validé : Combat-Ready"
+
+##############################################################
+# 📘 Manuel Technique – Module Physique SdrInterface.kt
+##############################################################
+
+## 1. Rôle
+Le module `SdrInterface.kt` agit comme **driver DSP** :
+- Ouvre le flux avec le matériel SDR (RTL-SDR, HackRF, etc.).
+- Configure fréquence, bande passante et gain.
+- Pousse les échantillons IQ vers le `SignalClassifier`.
+
+--------------------------------------------------------------
+
+## 2. Pourquoi c’est le bras armé du SIGINT
+- **Traitement en Temps Réel**  
+  - Les signaux sont traités "au fil de l’eau".  
+  - Permet une alerte COP/BFT quelques millisecondes après une émission ennemie.  
+
+- **Abstraction Matérielle**  
+  - Le `SignalClassifier` reçoit un flux IQ normalisé.  
+  - Peu importe si la source est un dongle RTL-SDR à 30$ ou un équipement militaire à 50.000$.  
+  - L’IA reste indépendante du matériel.  
+
+- **Résilience**  
+  - Déconnexion antenne → erreur loguée immédiatement dans `MissionLogger`.  
+  - L’opérateur est averti en temps réel et peut réagir.  
+
+--------------------------------------------------------------
+
+## 3. Workflow Physique
+1. **Initialisation** : Ouverture du flux SDR.  
+2. **Configuration** : Réglage fréquence + gain.  
+3. **Streaming IQ** : Transmission des échantillons vers le `SignalClassifier`.  
+4. **Classification** : Détection des menaces et mise à jour COP.  
+5. **Surveillance** : Gestion des erreurs (antenne débranchée, saturation).  
+
+--------------------------------------------------------------
+
+## 4. Exemple d’Utilisation
+```kotlin
+val sdr = SdrInterface(device="rtl-sdr")
+sdr.setFrequency(145_000_000)   // 145 MHz
+sdr.setGain(30)                 // Gain en dB
+sdr.startStream { iqSamples ->
+    SignalClassifier.process(iqSamples)
+}
+
+##############################################################
+## 5. Intégration dans la Chaîne OODA
+
+- **Observe** : Capture RF en direct via SDR ou injection simulée (run_demo.sh).  
+- **Orient** : Normalisation des échantillons IQ par `SdrInterface.kt` et traitement par le `SignalClassifier`.  
+- **Decide** : Classification des signaux (menace vs allié) et validation par les scripts de recette (ATP).  
+- **Act** : Mise à jour du COP/BFT dans l’interface tactique, alerte opérateur et transmission aux unités alliées.  
+
+Cette intégration garantit que chaque étape – de la radiofréquence brute à la carte tactique – est validée et auditable, assurant un système réellement **Combat-Ready**.  
+##############################################################
