@@ -30,7 +30,7 @@ make rotate-keys
 ​Définit le périmètre de sécurité pour éviter le Panic Wipe automatique :
 
 nano core/security/active_geofence.poly
-# Format : latitude,longitude (un point par ligne)
+Format : latitude,longitude (un point par ligne)
 
 
 ## 3. COMPILATION & DURCISSEMENT (≈ 1 minute)
