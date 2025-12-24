@@ -1,7 +1,7 @@
 package sigint.elint.tests
 
-import sigint.elint.*
-import sigint.core.EventBus
+import sigint.elint.ElintClassifier
+import sigint.elint.RadarProfile
 import sigint.sync.SyncWorker
 import core.sync.MeshSyncEngine
 import core.audit.MissionLogger
@@ -14,16 +14,17 @@ object ElintTest {
         MeshSyncEngine.startEngine()
         SyncWorker.startListening()
 
-        // Simulation de signatures ELINT chargées
-        val signatures = listOf(
-            ElintSignature("SURV_RADAR_X", 1200.0, 5000.0, 50.0)
+        // 1. Initialisation avec profils de test
+        val profiles = listOf(
+            RadarProfile("DRONE_SEARCH_RADAR", 1200.0, 15.0, "S-BAND", 50.0, 4)
         )
-        val classifier = ElintClassifier(signatures)
+        val classifier = ElintClassifier(profiles)
 
-        // Simuler la détection d'un radar de surveillance (1210 Hz, 4990 kHz)
-        classifier.classify(detectedPrf = 1210.0, detectedBw = 4990.0)
+        // 2. Simulation d'un radar de drone détecté (paramètres dans la tolérance)
+        println("[TEST] Simulation pulses: PRF 1210 Hz, PW 15.2 us...")
+        classifier.identify(1210.0, 15.2)
 
-        Thread.sleep(1000)
+        Thread.sleep(1500)
         MeshSyncEngine.stopEngine()
         MissionLogger.info("=== [TEST ELINT COMPLETED] ===")
     }
