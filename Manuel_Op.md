@@ -1141,3 +1141,64 @@ Dans un contexte tactique, il est conçu pour être **résilient** face aux pert
 - **Détection proactive** : filtrage des signaux falsifiés pour contrer le spoofing.  
 - **Auditabilité** : reconstruction certifiable des trajets pour analyse post‑mission.  
 - **Institutionnalisation** : module documenté et intégré, prêt pour adoption officielle.
+
+## 📑 MissionReportGenerator.kt – Rapport de Mission Automatique (AAR)
+
+### Objectif
+Le module **MissionReportGenerator.kt** compile toutes les détections (COMINT, ELINT, FISINT) stockées dans le **LogManager** et l’**AuditExport** pour générer un **After Action Report (AAR)** chiffré et signé.  
+Ce rapport constitue la pièce finale du puzzle technologique : il centralise les preuves et produit un bilan opérationnel certifiable, prêt à être transmis au haut commandement.
+
+---
+
+### Caractéristiques "Combat‑Ready"
+
+#### Centralisation des preuves
+- Agrège les interceptions COMINT (voix/données), ELINT (radar/impulsions) et FISINT (télémétrie/IoT).  
+- Génère un condensé unique, structuré et hiérarchisé.  
+
+#### Sécurité et traçabilité
+- Chaque rapport est **chiffré** et **signé** via HMAC.  
+- Garantit l’intégrité et l’authenticité des données transmises.  
+- Empêche toute falsification ou manipulation par un adversaire.  
+
+#### Auditabilité totale
+- Intégration directe avec **MissionLogger** et **AuditExport**.  
+- Chaque événement critique est horodaté et certifié.  
+- Permet une reconstruction fidèle et inviolable de la mission.  
+
+#### Automatisation
+- Intégré dans **tests/TestFullRecette.kt** : chaque test de recette se termine par la génération d’un rapport automatique.  
+- Réduit la charge humaine et garantit la systématisation des bilans.  
+
+---
+
+### Exemple de scénario
+- **Situation** : une unité SIGINT intercepte des communications radio (COMINT), détecte un radar ennemi (ELINT) et capte une télémétrie suspecte (FISINT).  
+- **Action** : toutes les détections sont enregistrées dans le LogManager et signées par MissionLogger.  
+- **Résultat** : MissionReportGenerator compile automatiquement les preuves et produit un rapport AAR chiffré, transmis au haut commandement pour analyse stratégique.  
+
+---
+
+### Valeur opérationnelle (FARDC)
+- **Supériorité décisionnelle** : passage du renseignement brut à un rapport stratégique exploitable.  
+- **Institutionnalisation** : standardisation des bilans de mission, prêts pour adoption officielle.  
+- **Auditabilité** : traçabilité inviolable, certifiable devant toute instance.  
+- **Automatisation** : gain de temps et réduction des erreurs humaines.  
+
+---
+
+### État final de la structure SIGINT
+
+- **COMINT** : interception voix/données.  
+- **ELINT** : interception radar/impulsions.  
+- **FISINT** : interception télémétrie/IoT.  
+- **AUDIT** : traçabilité HMAC et rapports automatisés (MissionLogger, MissionReportGenerator).  
+- **CORE/SYNC** : réseau Mesh et priorisation des alertes.  
+
+---
+
+### 🚀 Roadmap finale
+- **Phase 1 (terminée)** : Sécurité & Audit (armure et mémoire).  
+- **Phase 2 (terminée)** : SIGINT IA & Mesh (capteurs et voix).  
+- **Phase 3 (terminée)** : BFT & Fusion UI (coordination et vision).  
+- **Phase 4 (finalisée)** : AAR automatisé (décision et transmission stratégique).
