@@ -15,7 +15,8 @@
 ## 2. DÉPLOIEMENT INITIAL (≈ 3 minutes)
 
 ### A. Initialisation du dépôt
-```bash
+
+bash
 git clone [https://github.com/Bombele/Combat-Ready-System-SIGINT.git](https://github.com/Bombele/Combat-Ready-System-SIGINT.git)
 cd Combat-Ready-System-SIGINT
 chmod +x scripts/*.sh infra/deployment/*.sh
