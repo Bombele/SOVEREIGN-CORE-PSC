@@ -1,1 +1,10 @@
+{
+  "compliance_standards": "MIL-STD-SRC-RDC-2025",
+  "requirements": [
+    { "id": "SEC-001", "name": "Mission Keys Presence", "critical": true },
+    { "id": "AUD-002", "name": "Event Logging Integrity", "critical": true },
+    { "id": "REP-003", "name": "HMAC Report Signature", "critical": true },
+    { "id": "GEO-004", "name": "Geofence Enforcement", "critical": true }
+  ]
+}
 
