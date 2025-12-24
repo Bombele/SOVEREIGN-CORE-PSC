@@ -254,3 +254,79 @@ sdr.startStream { iqSamples ->
 
 Cette intégration garantit que chaque étape – de la radiofréquence brute à la carte tactique – est validée et auditable, assurant un système réellement **Combat-Ready**.  
 ##############################################################
+
+##############################################################
+# 📘 Mise à jour – Implémentation du SignatureManager.kt
+##############################################################
+
+## 1. Rôle du SignatureManager
+Le fichier `SignatureManager.kt` est le module qui transforme une détection brute en **renseignement exploitable**.  
+Il compare les caractéristiques techniques du signal (largeur de bande, espacement des canaux, type de saut de fréquence) à une **Electronic Library (ELIB)**, une base de données de menaces connues.  
+
+--------------------------------------------------------------
+
+## 2. Pourquoi ce module complète ton architecture ?
+
+- **Réduction des Faux Positifs**  
+  En couplant le `SignalClassifier` (IA) au `SignatureManager`, le système filtre les signaux civils.  
+  → Résultat : pas d’alerte rouge inutile, uniquement des menaces validées.
+
+- **Renseignement Évolutif (RECOCE)**  
+  Les unités peuvent enregistrer l’empreinte d’une nouvelle radio rencontrée sur le terrain.  
+  Cette signature est ensuite diffusée via le `MeshSyncEngine` à toutes les unités de la zone.  
+  → Résultat : la base de connaissances s’enrichit en continu.
+
+- **Priorisation Tactique**  
+  Le champ `threatLevel` permet de hiérarchiser les alertes :  
+  - Niveau critique → interruption immédiate de l’opérateur.  
+  - Niveau faible → enregistrement en arrière-plan.  
+  → Résultat : l’opérateur reste concentré sur l’essentiel.
+
+--------------------------------------------------------------
+
+## 3. Workflow du SignatureManager
+1. **Réception** : Le `SignalClassifier` envoie un signal détecté.  
+2. **Comparaison** : Le `SignatureManager` cherche une correspondance dans l’ELIB.  
+3. **Attribution** : Nom + dangerosité (threatLevel).  
+4. **Diffusion** : Envoi au `MeshSyncEngine` pour partage avec les alliés.  
+5. **Journalisation** : Enregistrement dans le `MissionLogger` pour audit.  
+
+--------------------------------------------------------------
+
+## 4. Exemple d’Utilisation
+kotlin
+val signatureManager = SignatureManager(elibDatabase)
+val detection = SignalClassifier.detect(iqSamples)
+val threat = signatureManager.evaluate(detection)
+
+if (threat.level == ThreatLevel.CRITICAL) {
+    MeshSyncEngine.broadcast(threat)
+    MissionLogger.alert(threat)
+} else {
+    MissionLogger.record(threat)
+}
+
+## 5. 🏁 Bilan : Suite SIGINT Complète
+Tu disposes désormais d’un pipeline opérationnel dans sigint/ et services/dsp/ :
+
+1. SdrInterface : Capte le flux IQ brut depuis le matériel SDR.  
+2. SignalClassifier : Utilise l’IA pour reconnaître les formes d’ondes.  
+3. SignatureManager : Associe une identité et un niveau de dangerosité à la menace.  
+4. MeshSyncEngine : Diffuse l’alerte et les signatures aux unités alliées via le réseau Mesh.  
+
+--------------------------------------------------------------
+
+## 6. Intégration dans la Chaîne OODA
+- Observe : Capture RF en direct (SdrInterface).  
+- Orient : Classification IA + signatures (SignatureManager).  
+- Decide : Priorisation par threatLevel.  
+- Act : Diffusion Mesh + affichage COP/BFT.  
+
+--------------------------------------------------------------
+
+## 7. Conclusion
+Avec SignatureManager.kt, ton système SIGINT passe du stade de détection brute à celui de renseignement tactique certifiable.  
+La Suite SIGINT est désormais complète, auditable et prête pour déploiement terrain.  
+
+########################################################
+`
