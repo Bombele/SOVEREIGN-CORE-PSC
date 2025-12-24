@@ -188,7 +188,7 @@ En mode `--demo-mode`, `Main.kt` alimente automatiquement le **FusionOverlay** a
 
 ## 7. Procédure de Recette (ATP)
 ### Nouvelle cible Makefile : `recette`
-```makefile
+makefile
 recette:
 	@echo "🔎 Démarrage de la procédure de Recette (ATP)..."
 	@./test_keys.sh || exit 1
@@ -236,7 +236,7 @@ Le module `SdrInterface.kt` agit comme **driver DSP** :
 --------------------------------------------------------------
 
 ## 4. Exemple d’Utilisation
-```kotlin
+kotlin
 val sdr = SdrInterface(device="rtl-sdr")
 sdr.setFrequency(145_000_000)   // 145 MHz
 sdr.setGain(30)                 // Gain en dB
