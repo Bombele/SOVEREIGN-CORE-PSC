@@ -1,22 +1,27 @@
 package sigint.elint
 
 import sigint.audit.LogManager
+import sigint.core.EventBus
 import kotlin.math.abs
 
-class ElintClassifier(private val profiles: List<ElintSignature>) {
+data class RadarProfile(val name: String, val prfHz: Double, val pwUs: Double, val band: String, val tolerance: Double, val threatLevel: Int)
 
-    fun classify(detectedPrf: Double, detectedBw: Double): ElintSignature? {
-        // On cherche la signature la plus proche dans la bibliothèque
-        val match = profiles.find { profile ->
-            abs(profile.prfHz - detectedPrf) <= profile.tolerance &&
-            abs(profile.bandwidthKhz - detectedBw) <= profile.tolerance
+class ElintClassifier(private val profiles: List<RadarProfile>) {
+
+    fun identify(measuredPrf: Double, measuredPw: Double) {
+        val match = profiles.find { 
+            abs(it.prfHz - measuredPrf) <= it.tolerance && abs(it.pwUs - measuredPw) <= (it.tolerance / 10)
         }
 
         if (match != null) {
-            LogManager.info("ELINT_MATCH: Radar détecté -> ${match.name}")
+            LogManager.warn("ELINT_MATCH: ${match.name} détecté (PRF: $measuredPrf Hz, Band: ${match.band})")
+            EventBus.publish("ELINT_DETECTION", mapOf(
+                "target" to match.name,
+                "threat_level" to match.threatLevel,
+                "confidence" to 0.95
+            ))
         } else {
-            LogManager.warn("ELINT_UNKNOWN: Signal pulsé non répertorié (PRF: $detectedPrf Hz)")
+            LogManager.info("ELINT_SCAN: Pulse détecté mais non répertorié (PRF: $measuredPrf Hz)")
         }
-        return match
     }
 }
