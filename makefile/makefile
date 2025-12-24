@@ -54,3 +54,10 @@ recette:
 	@./scripts/test_ui.sh || { echo "[FAIL] UI non fonctionnelle."; exit 1; }
 	@echo "[OK] FusionOverlay opérationnel."
 	@echo "=== [RECETTE TERMINÉE : SYSTÈME COMBAT-READY] ==="
+
+# 🚀 Recette SIGINT (COMINT)
+recette-sigint:
+	@echo "=== [RECETTE SIGINT - COMINT] ==="
+	@kotlinc -d bin/ src/**/*.kt sigint/**/*.kt tests/**/*.kt
+	@java -cp bin sigint.comint.tests.ComintTest
+	@echo "=== [RECETTE SIGINT TERMINÉE] ==="
