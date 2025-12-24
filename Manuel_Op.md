@@ -1029,3 +1029,68 @@ Il transforme les paquets binaires (CBOR/Protobuf) en objets graphiques standard
 - **Situation** : une unité SIGINT détecte une émission radar suspecte.  
 - **Action** : le SignalClassifier génère un ThreatMessage, signé et diffusé via MeshSyncEngine.  
 - **Résultat** : FusionOverlay affiche la zone de menace sur la carte tactique. Les positions BFT des unités amies apparaissent au‑dessus, permettant au commandement de décider immédiatement d’un repositionnement ou d’une contre‑mesure.
+
+## 🛡️ Plateforme SENTINELLE – Battlefield Management System (BMS)
+
+### Objectif
+La fusion du **BFT (Blue Force Tracking)** et du **SIGINT (Signals Intelligence)** dans une seule architecture crée un véritable **Système de Gestion de l’Espace de Bataille (BMS)**.  
+Pour les FARDC, cela signifie passer d’une vision partielle à une **Conscience Situationnelle Totale**, où chaque bit d’information – ami ou ennemi – suit le même circuit sécurisé.
+
+---
+
+### 1. Le Message Unifié (UnifiedMessage.kt)
+- **Clé de la fusion** : une enveloppe unique transportée par le MeshSyncEngine.  
+- **Payloads possibles** :  
+  - BFT → *“Je suis ici (Unité Alpha)”*  
+  - SIGINT → *“L’ennemi est là (Radio VHF détectée)”*  
+  - JAMMING → *“Brouillage actif sur 144 MHz”*  
+- **Effet** : indifférence au transport, sécurité par compartimentage, auditabilité totale.
+
+---
+
+### 2. Carte Tactique Fusionnée (ui/map/)
+- **Blue Forces (BFT)** : positions précises des troupes amies.  
+- **Red Spots (SIGINT)** : sources hostiles détectées par l’IA.  
+- **Grey Zones** : zones de silence radio ou de brouillage.  
+- **Résultat** : interface décisionnelle unique, COP partagé entre toutes les unités.
+
+---
+
+### 3. Pourquoi cette fusion est révolutionnaire ?
+
+#### A. Brouillage sélectif & protection fratricide
+- Le module BFT connaît les fréquences utilisées par nos propres radios.  
+- Lorsqu’il active le module Jamming, il crée des “encoches” de fréquence.  
+- **Effet** : brouillage des communications ennemies sans couper celles des forces amies.
+
+#### B. Triangulation collaborative par Mesh
+- Soldat A détecte un signal à 30°.  
+- Soldat B (positionné via BFT) détecte le même signal à 330°.  
+- **Résultat** : croisement automatique des positions BFT et des angles SIGINT → localisation GPS précise de l’ennemi.
+
+#### C. Sécurité “Total Wipe” unifiée
+- Le TacticalWipeManager protège désormais l’intégralité du secret militaire.  
+- En cas de capture, effacement simultané des données SIGINT et de l’historique BFT.  
+- **Effet** : aucune donnée exploitable ne subsiste.
+
+---
+
+### 4. Implémentation – UnifiedSync.kt
+- **Fusion logique** : unifie la gestion des messages, la synchronisation Mesh et la journalisation.  
+- **Résultat** : chaque terminal devient un nœud SENTINELLE, capable de transmettre, recevoir et fusionner les données BFT + SIGINT en temps réel.
+
+---
+
+### 🚀 Roadmap finale vers la puissance nationale
+- **Phase 1 (terminée)** : Sécurité & Audit → l’armure et la mémoire (MissionLogger, TacticalWipeManager).  
+- **Phase 2 (terminée)** : SIGINT IA & Mesh → les capteurs et la voix (SignalClassifier, MeshSyncEngine).  
+- **Phase 3 (actuelle)** : BFT & Fusion UI → la coordination et la vision (UnifiedMessage, FusionOverlay).  
+
+---
+
+### Valeur opérationnelle (FARDC)
+- **Conscience situationnelle totale** : forces amies + menaces ennemies dans un flux unique.  
+- **Supériorité décisionnelle** : interface cartographique enrichie, COP partagé.  
+- **Spectre maîtrisé** : brouillage sélectif, triangulation collaborative.  
+- **Sécurité nationale** : wipe unifié, auditabilité certifiable.  
+- **Institutionnalisation** : plateforme SENTINELLE documentée, prête pour adoption officielle.
