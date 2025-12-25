@@ -1374,3 +1374,54 @@ Il constitue la partie la plus complexe du COMINT, permettant de passer du signa
 - **Interopérabilité** : architecture multimodale, extensible à tous les protocoles tactiques.  
 - **Priorisation intelligente** : alertes visuelles immédiates pour les menaces critiques, discrétion pour les voix.  
 - **Institutionnalisation** : module documenté et intégré, prêt pour adoption officielle.
+
+## 🗣️ ComintTranscriber.kt – Intelligence Lexicale
+
+### Objectif
+Le module **ComintTranscriber.kt** analyse automatiquement le contenu des communications interceptées.  
+Il applique une logique de détection de mots‑clés tactiques pour transformer un flux audio ou numérique en renseignement exploitable, réduisant la charge cognitive de l’opérateur et permettant une diffusion immédiate des alertes.
+
+---
+
+### Caractéristiques "Combat‑Ready"
+
+#### Réduction de la charge cognitive
+- L’opérateur n’a plus besoin d’écouter des heures de “friture” radio.  
+- Le système déclenche une alerte uniquement lorsqu’un mot‑clé tactique est détecté (ex. *“ATTAQUE”*, *“OPFOR”*).  
+- Permet à l’opérateur de rester concentré sur sa navigation et ses décisions.
+
+#### Alerte multi‑canaux
+- Dès qu’une alerte **TACTICAL_ALARM** est générée, elle est publiée via le **MeshSyncEngine**.  
+- Toute l’escouade reçoit l’alerte sur sa carte tactique en temps réel.  
+- Assure une conscience situationnelle partagée et instantanée.
+
+#### Filtrage automatique
+- Conversations civiles ou banales sont ignorées.  
+- Le système se focalise uniquement sur les vecteurs d’intérêt militaire.  
+- Réduit les faux positifs et améliore la pertinence des alertes.
+
+---
+
+### Intégration dans ComintAnalyzer.kt
+- **Capture ➔ Décodage ➔ Transcription ➔ Alerte UI**.  
+- Pipeline complet :  
+  1. **ComintCapture** : récupère le signal (réel ou mock).  
+  2. **ComintUtils** : calcule la force et la qualité (SNR/dBm).  
+  3. **ComintDecoder** : démodule le signal (phase/fréquence).  
+  4. **ComintTranscriber** : comprend le sens (mots‑clés tactiques).  
+  5. **EventBus / Mesh** : diffuse l’intelligence aux unités voisines.  
+
+---
+
+### Exemple de scénario
+- **Situation** : une unité intercepte une communication radio ennemie.  
+- **Action** : ComintDecoder démodule le signal, ComintTranscriber détecte le mot‑clé *“ATTAQUE”*.  
+- **Résultat** : une alerte TACTICAL_ALARM est générée et diffusée via MeshSyncEngine. Toute l’escouade voit immédiatement l’alerte sur sa carte FusionOverlay.  
+
+---
+
+### Valeur opérationnelle (FARDC)
+- **Supériorité décisionnelle** : passage direct du spectre brut au renseignement lexical exploitable.  
+- **Conscience situationnelle partagée** : alertes multi‑canaux synchronisées sur toutes les cartes tactiques.  
+- **Fiabilité accrue** : filtrage automatique des conversations non pertinentes.  
+- **Institutionnalisation** : pipeline COMINT complet, documenté et prêt pour adoption officielle.
