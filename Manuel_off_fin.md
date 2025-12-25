@@ -23,8 +23,12 @@ Le mode d'Interception de Transaction est conçu pour l'asphyxie financière des
 
  #### * vectors/financial/mitm_engine.py :
  moteur d'interception agnostique. Gère la modification des RIB/Identifiants et le recalcul des checksums pour les protocoles bancaires (ISO 8583) et Mobile Money.
- * auditblackbox/chainsealer.py : module de légitimité. Scelle cryptographiquement chaque action pour garantir l'intégrité de la chaîne de commandement et l'impossibilité d'effacer les preuves.
- * core/gatekeeper/PKI_Validator.kt : interface d'autorisation exigeant les clés de l'État-Major pour déverrouiller la phase d'effet.
+
+ #### * auditblackbox/chainsealer.py :
+ module de légitimité. Scelle cryptographiquement chaque action pour garantir l'intégrité de la chaîne de commandement et l'impossibilité d'effacer les preuves.
+
+ #### * core/gatekeeper/PKI_Validator.kt : 
+interface d'autorisation exigeant les clés de l'État-Major pour déverrouiller la phase d'effet.
 
 ### Procédures de fonctionnement
 
