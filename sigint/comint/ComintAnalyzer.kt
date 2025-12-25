@@ -23,3 +23,13 @@ class ComintAnalyzer(private val decoder: ComintDecoder) {
         }
     }
 }
+// Extrait de l'intégration dans l'Analyzer
+fun processCapture(buffer: ByteArray) {
+    val snr = ComintUtils.estimateSnr(buffer)
+    val power = ComintUtils.estimatePowerDbm(buffer)
+
+    if (snr > 12.0) { // Seuil de détection tactique
+        LogManager.info("DETECTED: Signal identifié à ${String.format("%.2f", power)} dBm (SNR: ${String.format("%.2f", snr)} dB)")
+        // Lancer le décodage...
+    }
+}
