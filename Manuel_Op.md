@@ -1264,3 +1264,63 @@ En le liant au **MissionReportGenerator.kt**, chaque rapport de mission (AAR) in
 - **Rigueur & validité** : preuves collectées juridiquement et tactiquement valides.  
 - **Transparence & évolutivité** : normes mises à jour par les autorités sans modification du code.  
 - **Institutionnalisation** : adoption officielle comme système de gestion certifié.
+
+## 🎛️ Couche DSP – ComintUtils & ComintAnalyzer
+
+### Objectif
+La couche **DSP (Digital Signal Processing)** est la brique qui permet de transformer les données brutes issues des antennes SDR en indicateurs tactiques exploitables.  
+Elle donne au système COMINT la capacité de mesurer la puissance réelle des signaux, de filtrer le bruit et d’adapter l’analyse à n’importe quelle antenne.
+
+---
+
+### Modules associés
+
+#### 📂 sigint/comint/ComintUtils.kt
+- **Boîte à outils mathématiques** pour le traitement des signaux.  
+- Algorithmes de base :  
+  - Calcul de la puissance du signal (dBm).  
+  - Calcul du niveau de bruit.  
+  - Rapport signal/bruit (SNR).  
+- Paramètres ajustables pour l’étalonnage selon l’antenne utilisée.  
+
+#### 📂 sigint/comint/ComintAnalyzer.kt
+- Utilise les fonctions de **ComintUtils** pour analyser les flux IQ.  
+- Décisions basées sur des données réelles :  
+  - Détection de signaux forts (danger immédiat).  
+  - Filtrage des faux positifs liés au bruit de fond.  
+  - Classification enrichie par la mesure de puissance et de SNR.  
+
+---
+
+### Avancées majeures
+
+#### Précision tactique
+- Le système ne détecte plus seulement “quelque chose”.  
+- Il mesure la **force du signal** :  
+  - **-40 dBm** → signal très proche, menace immédiate.  
+  - **-95 dBm** → signal faible ou lointain.  
+
+#### Filtrage du bruit
+- Calcul du **SNR (Signal‑to‑Noise Ratio)**.  
+- Évite les faux positifs déclenchés par le bruit de fond électronique.  
+- Améliore la fiabilité des alertes SIGINT.  
+
+#### Étalonnage
+- **ComintUtils** permet d’adapter le logiciel à n’importe quelle antenne.  
+- Ajustement simple des constantes de calcul.  
+- Assure une compatibilité multi‑matériel et une précision homogène.  
+
+---
+
+### Exemple de scénario
+- **Situation** : une unité capte un signal faible dans une zone brouillée.  
+- **Action** : ComintAnalyzer calcule la puissance et le SNR via ComintUtils.  
+- **Résultat** : le système détermine que le signal est trop proche du bruit pour être fiable et évite un faux positif.  
+
+---
+
+### Valeur opérationnelle (FARDC)
+- **Supériorité technique** : passage du “bruit brut” à des indicateurs tactiques mesurés.  
+- **Fiabilité accrue** : réduction des faux positifs, meilleure confiance dans les alertes.  
+- **Interopérabilité** : adaptation à toutes les antennes et environnements.  
+- **Institutionnalisation** : module DSP documenté et intégré, prêt pour adoption officielle.
