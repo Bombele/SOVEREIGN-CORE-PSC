@@ -13,9 +13,9 @@ CLASSIFICATION : TRÈS SECRET
 Modes opérationnels – SIGINT Combat-Ready
 Ce chapitre regroupe tous les profils de mission disponibles dans le système SIGINT combat-ready. Chaque mode est conçu pour répondre à un contexte opérationnel spécifique et active/désactive des modules précis.
 
-##💰 Mode Interception MitM Financier – Détail complet
+## 💰 Mode Interception MitM Financier – Détail complet
 
-###Objectif
+### Objectif
 
 Le mode d'Interception de Transaction est conçu pour l'asphyxie financière des entités hostiles. Au lieu de simplement bloquer un flux, le système opère un détournement furtif des fonds vers les comptes de l'État (Saisie conservatoire numérique), privant l'ennemi de ses moyens logistiques et d'achat d'armement.
 Modules associés
