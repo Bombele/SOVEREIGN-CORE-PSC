@@ -19,9 +19,9 @@ Ce chapitre regroupe tous les profils de mission disponibles dans le système SI
 
 Le mode d'Interception de Transaction est conçu pour l'asphyxie financière des entités hostiles. Au lieu de simplement bloquer un flux, le système opère un détournement furtif des fonds vers les comptes de l'État (Saisie conservatoire numérique), privant l'ennemi de ses moyens logistiques et d'achat d'armement.
 Modules associés
- * vectors/financial/mitm_engine.py : moteur d'interception agnostique. Gère la modification des RIB/Identifiants et le recalcul des checksums pour les protocoles bancaires (ISO 8583) et Mobile Money.
- * auditblackbox/chainsealer.py : module de légitimité. Scelle cryptographiquement chaque action pour garantir l'intégrité de la chaîne de commandement et l'impossibilité d'effacer les preuves.
- * core/gatekeeper/PKI_Validator.kt : interface d'autorisation exigeant les clés de l'État-Major pour déverrouiller la phase d'effet.
+ #### * vectors/financial/mitm_engine.py : moteur d'interception agnostique. Gère la modification des RIB/Identifiants et le recalcul des checksums pour les protocoles bancaires (ISO 8583) et Mobile Money.
+ #### * auditblackbox/chainsealer.py : module de légitimité. Scelle cryptographiquement chaque action pour garantir l'intégrité de la chaîne de commandement et l'impossibilité d'effacer les preuves.
+ #### * core/gatekeeper/PKI_Validator.kt : interface d'autorisation exigeant les clés de l'État-Major pour déverrouiller la phase d'effet.
 ###Procédures de fonctionnement
  * Positionnement stratégique : Connexion physique au switch central (national) ou déploiement de sondes IMSI-Catcher/FHSS (tactique).
  * Phase d'Observation : Activation du mode passif pour identifier les RIB cibles et accumuler les preuves de financement sans alerter l'adversaire.
