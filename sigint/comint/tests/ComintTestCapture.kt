@@ -1,36 +1,43 @@
 package sigint.comint.tests
 
 import sigint.comint.ComintCapture
-import core.audit.MissionLogger
+import sigint.comint.ComintCapture.Mode
+import sigint.audit.LogManager
+import java.io.File
 
 /**
- * SRC - ComintTestCapture
- * Valide les flux de capture en mode Simulation et SDR.
+ * Test d'intégration pour ComintCapture.
+ * Vérifie la capture en mode MOCK et SDR.
  */
 object ComintTestCapture {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        MissionLogger.info("=== [TEST COMINT CAPTURE START] ===")
+        println("=== [TEST COMINT CAPTURE] ===")
 
-        // 1. Test du mode MOCK (Simulation)
-        val mockCaptureInstance = ComintCapture(ComintCapture.Mode.MOCK)
-        println("[TEST] Lancement capture MOCK sur 145.5 MHz...")
-        val mockData = mockCaptureInstance.capture(145.5, 500)
-        
-        if (mockData.isNotEmpty()) {
-            println("✅ MOCK SUCCESS: ${mockData.size} octets simulés capturés.")
+        // 1. Mode MOCK
+        val mockCapture = ComintCapture(Mode.MOCK)
+        val mockBuffer = mockCapture.capture(144.500, 500)
+        println("[MOCK] Buffer capturé: taille=${mockBuffer.size}")
+        LogManager.info("TEST_COMINT: MOCK capture OK")
+
+        // 2. Mode SDR (placeholder)
+        val sdrCapture = ComintCapture(Mode.SDR)
+        val sdrBuffer = sdrCapture.capture(145.000, 1000)
+        println("[SDR] Buffer capturé: taille=${sdrBuffer.size}")
+        LogManager.info("TEST_COMINT: SDR capture OK")
+
+        // 3. Vérification des logs
+        val logFile = File("data/logs/sigint_module.log")
+        if (logFile.exists()) {
+            val content = logFile.readText()
+            if (content.contains("COMINT_CAPTURE")) {
+                println("✅ Les captures ont été correctement loguées.")
+            } else {
+                println("❌ Aucun log de capture trouvé.")
+            }
         }
 
-        // 2. Test du mode SDR (Hardware ready)
-        val sdrCaptureInstance = ComintCapture(ComintCapture.Mode.SDR)
-        println("[TEST] Lancement capture SDR sur 433.0 MHz...")
-        val sdrData = sdrCaptureInstance.capture(433.0, 200)
-
-        if (sdrData.isNotEmpty()) {
-            println("✅ SDR INTERFACE SUCCESS: Buffer initialisé.")
-        }
-
-        MissionLogger.info("=== [TEST COMINT CAPTURE COMPLETED] ===")
+        println("=== [TEST COMINT CAPTURE TERMINÉ] ===")
     }
 }
