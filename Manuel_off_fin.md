@@ -211,5 +211,50 @@ Le Commandant Control Center est le centre de fusion où les interceptions finan
 
  * Discipline de Commandement : Asservissement total des capacités offensives à la validation de l'État-Major.
 
+## 💰 Mode Interception MitM Financier – Détail complet
+### Objectif
+Le mode d'Interception de Transaction est conçu pour l'asphyxie financière des entités hostiles. Au lieu de simplement bloquer un flux, le système opère un détournement furtif des fonds vers les comptes de l'État (Saisie Conservatoire Numérique), privant l'ennemi de ses moyens logistiques et d'achat d'armement.
+### Modules associés
+ * vectors/financial/mitm_engine.py : Moteur d'interception agnostique (API REST, ISO 8583, Mobile Money). Gère la modification des RIB et le recalcul des checksums.
+ * auditblackbox/chainsealer.py : Module de légitimité cryptographique lié à la "BlackBox".
+ * core/gatekeeper/PKI_Validator.kt : Interface d'autorisation exigeant les clés de l'État-Major.
+## 📡 Vecteurs de Connectivité – Interception Financière
+### 1. La Passerelle de Souveraineté (Légale/Directe)
+Le Lien : Tunnel VPN chiffré permanent entre le Core Engine et les serveurs centraux des opérateurs.
+ * 📂 Fichier : connectivity/gateways/sovereign_api.py
+ * Fonctionnement : Utilise des requêtes API REST (GET pour le solde, PATCH pour le routage, PUT pour le gel de compte).
+### 2. L'Interception Réseau (Passive/Offensive)
+Le Lien : Insertion physique via "Optical Taps" ou sondes SPAN dans les Datacenters.
+ * 📂 Fichier : connectivity/network/passive_interceptor.py
+ * Fonctionnement : Analyse via la bibliothèque Scapy et injection de paquets (TCP Reset) pour briser ou modifier les transactions au vol.
+### 3. Le "Hook" de Chambre de Compensation (Niveau Central)
+Le Lien : Intégration directe au commutateur national (Switch central).
+ * 📂 Fichier : connectivity/switch/iso8583_filter.py
+ * Fonctionnement : Middleware traitant le standard mondial ISO 8583. Agit comme un pare-feu financier avec injection de codes d'erreur (DEBIT_DENIED).
+## 🔗 Module CryptoLinker : Dé-anonymisation Blockchain
+Le CryptoLinker est le pont entre l'anonymat numérique des cryptomonnaies et la réalité physique du terrain. Son but est de lever le voile sur les portefeuilles utilisés par les groupes armés en croisant les flux de données.
+ * 📂 Fichier : vectors/financial/crypto_linker.py
+ * Fonctionnement : Ce code corrèle les sorties des nœuds Bitcoin/Ethereum avec les adresses IP et les identifiants IMSI interceptés au niveau des tours de télécommunication.
+## 🖥️ Tableau de Bord du Commandant (CCC - Commandant Control Center)
+Le Commandant Control Center est le centre de fusion où les interceptions financières et cryptographiques sont visualisées en temps réel sur une carte tactique.
+### Modules de Visualisation
+ * 📂 Fichier : dashboard/tactical_monitor.py : Centralise la télémétrie des trois méthodes d'interception et du CryptoLinker.
+ * 📂 Fichier : dashboard/ui_components.py : Composants graphiques pour l'interface visuelle du haut commandement.
+### Cartographie Tactique des Flux
+Grâce à l'intégration du CryptoLinker, le Commandant dispose d'une symbologie précise sur sa carte :
+ * 🔵 Icône Bleue : Transaction Mobile Money redirigée (Saisie souveraine en cours).
+ * 🟡 Icône Jaune : Portefeuille Crypto suspect identifié (En attente de corrélation).
+ * 🔴 Icône Rouge : Portefeuille Crypto dé-anonymisé (Identité physique confirmée, localisation GPS et IMSI corrélés).
+### Indicateurs de Performance (KPI)
+ * L'Indicateur de Succès : Montant total des fonds détournés (preuve de l'asphyxie ennemie).
+ * La Jauge de Risque : Probabilité de détection. À 80%, le système bascule en mode "Furtif" automatique.
+### 🏛️ Sécurisation de l'Interface
+ * Accès Biométrique / Double Clé : Nécessite l'insertion simultanée des clés matérielles (Yubikey/SmartCard) de l'Opérateur et du Magistrat Militaire.
+ * Hash de Session : Garantit que les données affichées n'ont pas été manipulées par un tiers (Lien direct avec la BlackBox).
+## Valeur Opérationnelle (FARDC)
+ * Fin de l'Anonymat : Traçabilité totale des financeurs occultes utilisant les cryptomonnaies.
+ * Extraction de Fonds : Récupération des capitaux ennemis pour financer la défense nationale.
+ * Discipline de Commandement : Asservissement total des capacités offensives à la validation cryptographique de l'État-Major.
+
 
 
