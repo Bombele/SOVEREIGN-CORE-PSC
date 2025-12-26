@@ -1,38 +1,39 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.9.0'
-    id 'com.github.johnrengelman.shadow' version '8.1.1' // Plugin pour créer le JAR complet
+    id 'com.github.johnrengelman.shadow' version '8.1.1' 
     id 'application'
 }
 
-group = 'com.fardc.sigint'
+// Nouvelle identité du projet PSC
+group = 'com.psc.sovereign'
 version = '1.0.0'
 
 repositories {
     mavenCentral()
-    maven { url 'https://jpos.org/maven' } // Dépôt spécifique pour jPOS
+    maven { url 'https://jpos.org/maven' }
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     
-    // --- Bibliothèques Financières (ISO 8583) ---
+    // Moteur financier ISO 8583
     implementation 'org.jpos:jpos:2.1.8'
     
-    // --- Réseau et Utilitaires ---
+    // Communication et Sécurité
     implementation 'io.netty:netty-all:4.1.94.Final'
     implementation 'com.google.code.gson:gson:2.10.1'
     
-    // --- Tests ---
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
 }
 
 application {
-    mainClass = 'com.fardc.sigint.core.MainKt'
+    // Assurez-vous que le package dans vos fichiers .kt correspond
+    mainClass = 'com.psc.sovereign.core.MainKt'
 }
 
-// Configuration du JAR "Shadow" (inclut toutes les dépendances)
 shadowJar {
-    archiveBaseName.set('sigint-core-all')
+    // Nom du binaire final adapté au nouveau projet
+    archiveBaseName.set('sovereign-core-psc')
     archiveClassifier.set('')
     archiveVersion.set('')
 }
