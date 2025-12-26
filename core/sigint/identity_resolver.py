@@ -18,3 +18,18 @@ class IdentityResolver:
 
     def get_identity(self, ip):
         return self.r.get(ip)
+
+import json
+
+def resolve_target(ip_address, imsi_data):
+    # Croisement de la base SIGINT
+    print(f"[*] Résolution d'identité pour {ip_address}...")
+    target_profile = {
+        "ip": ip_address,
+        "imsi": imsi_data,
+        "threat_level": "CRITICAL"
+    }
+    with open("data/audit/blackbox.log", "a") as f:
+        f.write(json.dumps(target_profile) + "\n")
+    return target_profile
+
