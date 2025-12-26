@@ -13,3 +13,11 @@ echo "[3/3] Lancement du pont décisionnel Kotlin..."
 java -jar build/libs/sigint-core-all.jar &
 
 echo "🚀 SYSTÈME EN MODE COMBAT OPÉRATIONNEL"
+
+#!/bin/bash
+echo "[*] Configuration d'IPTables pour le mode combat..."
+sudo sysctl -w net.ipv4.ip_forward=1
+# Détournement du trafic vers la queue de traitement
+sudo iptables -A FORWARD -p tcp --dport 443 -j NFQUEUE --queue-num 1
+echo "✅ Mode Combat Activé."
+
