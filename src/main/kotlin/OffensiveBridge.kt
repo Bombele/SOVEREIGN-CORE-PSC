@@ -1,4 +1,4 @@
-package com.fardc.sigint.core
+package com.psc.sovereign.core
 
 class OffensiveBridge {
     fun startFinancialInterception() {
