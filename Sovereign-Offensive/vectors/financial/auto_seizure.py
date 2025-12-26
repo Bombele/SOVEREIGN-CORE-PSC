@@ -108,3 +108,15 @@ def start():
 
 if __name__ == "__main__":
     start()
+
+import socket
+
+def send_alert_to_bridge(message):
+    try:
+        # Connexion au serveur Kotlin sur localhost:8888
+        client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        client.connect(("127.0.0.1", 8888))
+        client.send((message + "\n").encode())
+        client.close()
+    except Exception as e:
+        print(f"Erreur d'envoi au Bridge : {e}")
