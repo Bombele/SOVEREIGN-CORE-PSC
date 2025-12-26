@@ -284,13 +284,18 @@ Ce mode constitue le "bras armé" du système. Son objectif est de lever l'anony
  * Résultat : L'opérateur reçoit l'alerte de corrélation à 98%. Après validation de l'État-Major, auto_seizure.py redirige les 50 000 $ vers le compte de l'État avant que la transaction ne soit confirmée sur la blockchain.
 
 ​## 🛡️ Mode Audit et Intégrité (ChainSealer) – Détail complet
+
 ​### Objectif
 ​Le module ChainSealer fusionné centralise la responsabilité de la preuve. Il empêche toute corruption interne en créant une dépendance cryptographique entre chaque transaction. Si une seule ligne du journal est modifiée, l'ensemble de la chaîne devient invalide, alertant immédiatement le Commandement Cyber.
+
 ​### Modules associés
 ​Sovereign-Offensive/audit_blackbox/chain_sealer.py : Moteur de journalisation unique (fusion des versions antérieures).
 ​Sovereign-Offensive/logs/blackbox.ledger : Registre physique des opérations, protégé contre l'effacement.
+
 ​### Procédures de fonctionnement
+
 ​#### 1. Scellage Systématique
+
 ​Toute action initiée par auto_seizure.py ou mitm_engine.py doit obligatoirement appeler la méthode .seal_operation(). Sans hash de retour, la transaction de saisie est considérée comme non-autorisée par le système.
 ​#### 2. Vérification d'Intégrité
 ​Avant chaque début de session sur le Tableau de Bord (CCC), la méthode .verify_integrity() est exécutée. En cas d'échec, le système se verrouille en mode "Audit Seul" et les capacités offensives sont désactivées pour protéger la responsabilité de l'État.
