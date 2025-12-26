@@ -1,44 +1,35 @@
-package com.fardc.sigint.core
+package com.psc.sovereign.core
 
-import java.util.Scanner
 import kotlin.system.exitProcess
+import java.util.Scanner
 
-/**
- * SRC - Système de Renseignement de Combat
- * Point d'entrée principal du Cœur (Sentinel-Alpha)
- */
 fun main(args: Array<String>) {
     println("""
         ==================================================
-        🛡️ SRC - SENTINEL-ALPHA v1.0.0
-        Forces Armées de la RDC - État-Major
+        🛡️ SOVEREIGN-CORE-PSC v1.0.0
+        Système de Capacité Offensive Souveraine
         ==================================================
     """.trimIndent())
 
-    // 1. Initialisation du Gatekeeper (Sécurité PKI)
     val gatekeeper = Gatekeeper()
-    println("[CORE] Initialisation du Gatekeeper... OK")
-
-    // 2. Lancement du Pont avec les modules Python (OffensiveBridge)
     val bridge = OffensiveBridge(gatekeeper)
+
+    // Lancement du pont de communication avec les vecteurs Python
     Thread {
         try {
             bridge.startListening()
         } catch (e: Exception) {
-            println("[ERREUR] Échec du démarrage du Pont : ${e.message}")
+            println("[ERREUR] Échec du pont PSC : ${e.message}")
         }
     }.start()
 
-    println("[CORE] Système opérationnel. En attente de commandes d'État...")
-    println("[INFO] Appuyez sur 'Q' pour arrêter le système proprement.")
-
+    println("[CORE] Cœur PSC opérationnel et rattaché au Switch National.")
+    
     val scanner = Scanner(System.`in`)
     while (scanner.hasNextLine()) {
-        val input = scanner.nextLine()
-        if (input.equals("Q", ignoreCase = true)) {
-            println("[CORE] Arrêt du système sécurisé...")
+        if (scanner.nextLine().uppercase() == "Q") {
+            println("[CORE] Arrêt sécurisé du système PSC...")
             exitProcess(0)
         }
     }
 }
-
