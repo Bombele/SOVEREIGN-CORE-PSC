@@ -283,5 +283,29 @@ Ce mode constitue le "bras armé" du système. Son objectif est de lever l'anony
  * Action : Le high_scale_linker.py détecte la signature du protocole crypto. L'identity_resolver.py lie l'IP du tunnel VPN à l'IMSI du terminal satellite.
  * Résultat : L'opérateur reçoit l'alerte de corrélation à 98%. Après validation de l'État-Major, auto_seizure.py redirige les 50 000 $ vers le compte de l'État avant que la transaction ne soit confirmée sur la blockchain.
 
-
+​## 🛡️ Mode Saisie Mobile Money & USSD – Détail complet
+​### Objectif
+​Le module de saisie Mobile Money vise à neutraliser l'économie de proximité utilisée par les réseaux terroristes pour le paiement de rançons, de soldes de mercenaires et de logistique locale. Il agit par manipulation de charge utile (Payload Manipulation) sur les protocoles de transaction mobiles avant qu'ils n'atteignent le serveur de validation de l'opérateur.
+​### Modules associés
+​vectors/financial/auto_seizure.py : Moteur de réécriture de paquets. Il analyse les structures XML/JSON des transactions Mobile Money et substitue l'identifiant du destinataire suspect par l'identifiant du compte de Saisie Conservatoire de l'État.
+​core/sigint/identity_resolver.py : Assure que le numéro de téléphone émetteur correspond bien à l'IMSI de la cible sous surveillance.
+​### Procédures de fonctionnement (Tactique Terrain)
+​#### 1. Interception de la Requête
+​Le système est placé en amont du GGSN/PGW de l'opérateur ou utilise une station de base tactique (IMSI-Catcher).
+​Chaque requête de transfert (souvent HTTP/REST ou XML-RPC) est inspectée en temps réel.
+​#### 2. Modification "au vol" (On-the-fly)
+​Lorsque la signature d'un transfert est détectée, le auto_seizure.py modifie la destination.
+​Le système recalcule instantanément la taille du paquet (Content-Length) et les sommes de contrôle TCP pour éviter que le serveur de la banque ne rejette le paquet comme étant corrompu.
+​#### 3. Confirmation de Saisie
+​L'émetteur reçoit un message de confirmation de transfert réussi (le montant est bien débité).
+​Le destinataire initial ne reçoit rien.
+​Le Tableau de Bord (CCC) incrémente la jauge de "Fonds Saisis".
+​### Valeur opérationnelle (FARDC)
+​Étranglement financier immédiat : Capacité de couper les ressources d'une unité ennemie en pleine opération.
+​Intégrité des preuves : Chaque redirection est logguée cryptographiquement, permettant de justifier la saisie devant une cour martiale si nécessaire.
+​Furtivité psychologique : L'ennemi croit à une trahison interne (le payeur affirme avoir envoyé, le receveur affirme n'avoir rien reçu), créant de la paranoïa dans les réseaux de commandement hostiles.
+​### Exemple de scénario
+​Situation : Une cellule terroriste tente de payer un informateur local via Mobile Money.
+​Action : Le système intercepte la requête XML. Le script remplace le numéro de l'informateur par le numéro du compte souverain FARDC.
+​Résultat : L'informateur dénonce la cellule car il n'est pas payé, tandis que la cellule est débitée. L'État récupère les fonds et la source de renseignement ennemie est neutralisée.
 
