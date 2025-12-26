@@ -410,3 +410,33 @@ Chaque action de rejet est automatiquement transmise au module AuditExport.kt. C
 L'arsenal est désormais complet, couvrant du niveau tactique (Mobile Money) au niveau stratégique (Switch National).
 
 
+## 🔌 Raccordement à la Passerelle de Souveraineté (Link Layer)
+### Objectif
+Le script de raccordement est l'outil technique qui établit le lien vital entre l'infrastructure SRC (Système de Réponse Cyber) et les serveurs centraux des institutions financières ou de la Chambre de Compensation. Il garantit que le trafic ISO 8583 est acheminé de manière sécurisée et intègre vers le module de filtrage.
+### Modules associés
+ * scripts/connect_switch.sh : Script d'automatisation réseau. Configure les interfaces, vérifie les identités cryptographiques d'État et établit le tunnel de transport.
+ * NationalSwitchController.kt : Reçoit le flux redirigé par le script pour application des règles de filtrage.
+### Protocole de Connexion (Workflow Technique)
+#### 1. Vérification d'Identité
+Le système exige la présence des certificats d'État (state_auth.crt) et de la clé privée associée. Sans ces identités, le tunnel mTLS ne peut être négocié, empêchant toute interception non autorisée.
+#### 2. Établissement du Tunnel Sécurisé
+Le script initialise une interface réseau dédiée (ex: tun_switch_fardc). Ce canal utilise un protocole de tunnelisation durci pour isoler le flux financier du reste du trafic internet public.
+#### 3. Redirection du Flux (Port 8583)
+Par l'utilisation de règles de routage de bas niveau (iptables), le trafic financier entrant est redirigé vers le port local du contrôleur. Cette manipulation permet au NationalSwitchController d'agir comme une passerelle transparente.
+### 🛡️ Précautions de Mise en Œuvre (Standard Militaire)
+#### 1. Isolation Physique (Air-Gap Partiel)
+Le serveur doit impérativement disposer de deux cartes réseau physiques (NIC) distinctes :
+ * NIC Administration : Pour le contrôle interne et les mises à jour.
+ * NIC Interception : Dédiée exclusivement au lien avec le Switch National, sans accès au réseau public.
+#### 2. Chiffrement de Couche 2
+Pour une sécurité maximale, l'utilisation de chiffreurs matériels sur la fibre optique (Point-to-Point) est recommandée entre le centre de commandement et le point d'entrée de la Chambre de Compensation.
+#### 3. Alerte de Rupture de Liaison
+Toute déconnexion ou instabilité du tunnel doit déclencher une Alerte de Priorité 5 (Critique) sur le Tableau de Bord du Commandant. Une rupture peut signaler un sabotage physique ou une tentative de contournement par l'adversaire.
+## 🏁 Synthèse de l'Arsenal de Capacité Offensive Souveraine
+Le système dispose désormais d'une suite logicielle complète et intégrée :
+ * Logique de Décision : Gatekeeper.kt (Validation par double signature PKI).
+ * Action Financière : NationalSwitchController.kt (Filtrage et blocage ISO 8583).
+ * Paralysie Logistique : TacticalRansom.py (Immobilisation d'infrastructures ciblées).
+ * Lien Infrastructure : connect_switch.sh (Tunnel de souveraineté mTLS).
+
+
