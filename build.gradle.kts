@@ -1,45 +1,36 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.9.0'
-    id 'com.github.johnrengelman.shadow' version '8.1.1' 
-    id 'application'
+    kotlin("jvm") version "1.9.0"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
-// Nouvelle identité du projet PSC
-group = 'com.psc.sovereign'
-version = '1.0.0'
+group = "com.fardc.sigint"
+version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
-    maven { url 'https://jpos.org/maven' }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    // Standard Kotlin
+    implementation(kotlin("stdlib"))
+
+    // Réseau et communication (Socket, JSON)
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
     
-    // Moteur financier ISO 8583
-    implementation 'org.jpos:jpos:2.1.8'
-    
-    // Communication et Sécurité
-    implementation 'io.netty:netty-all:4.1.94.Final'
-    implementation 'com.google.code.gson:gson:2.10.1'
-    
-    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+    // Sécurité (si tu souhaites étendre la validation PKI plus tard)
+    implementation("org.bouncycastle:bcprov-jdk15on:1.70")
 }
 
-application {
-    // Assurez-vous que le package dans vos fichiers .kt correspond
-    mainClass = 'com.psc.sovereign.core.MainKt'
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions.jvmTarget = "17"
 }
 
-shadowJar {
-    // Nom du binaire final adapté au nouveau projet
-    archiveBaseName.set('sovereign-core-psc')
-    archiveClassifier.set('')
-    archiveVersion.set('')
-}
-
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
-    kotlinOptions {
-        jvmTarget = "1.8"
+tasks.shadowJar {
+    archiveBaseName.set("sigint-core")
+    archiveClassifier.set("all")
+    
+    // Définit la classe principale pour que "java -jar" sache quoi lancer
+    manifest {
+        attributes["Main-Class"] = "com.fardc.sigint.core.MainKt"
     }
 }
