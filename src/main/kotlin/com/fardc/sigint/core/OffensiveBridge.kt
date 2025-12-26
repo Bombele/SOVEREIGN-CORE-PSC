@@ -1,4 +1,4 @@
-package com.fardc.sigint.core
+package com.psc.sovereign.core
 
 import java.io.BufferedReader
 import java.io.InputStreamReader
