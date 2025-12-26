@@ -329,3 +329,37 @@ Ce mode constitue le "bras armé" du système. Son objectif est de lever l'anony
 ​Situation : Un chef de groupe armé attend une livraison d'armes financée par un transfert Mobile Money.
 ​Action : Le système saisit les fonds. 30 secondes plus tard, le chef reçoit un SMS : "Votre paiement pour l'opération X a été détourné par le Cyber-Commandement FARDC. Vos finances sont sous contrôle."
 ​Résultat : La livraison est annulée, le chef soupçonne son fournisseur de l'avoir dénoncé, et l'opération ennemie est avortée par manque de confiance mutuelle.
+
+
+# Modes opérationnels – SIGINT Combat-Ready
+## 🏗️ Mode Paralysie Logistique (TacticalRansomware)
+### Objectif
+Le TacticalRansomware est une arme de déni d'accès (A2/AD) numérique. Contrairement aux rançongiciels criminels, son but n'est pas l'extorsion, mais l'immobilisation tactique. Il vise à chiffrer les bases de données de ravitaillement, les plannings de transport et les inventaires d'armes de l'adversaire pour briser sa chaîne logistique durant une phase de combat.
+### Modules associés
+ * vectors/infra_cloud/tactical_ransom.py : Moteur de chiffrement de grade militaire (AES-256 GCM). Il verrouille les fichiers critiques tout en transmettant la clé de récupération à la audit_blackbox.
+ * audit_blackbox/chain_sealer.py : Séquestre les clés de déchiffrement, garantissant que seul l'État-Major peut ordonner la restauration des données.
+### Procédures de fonctionnement (Immobilisation)
+#### 1. Chiffrement Chirurgical
+Le système cible spécifiquement les extensions de fichiers liées aux bases de données (SQL, Oracle) et aux documents de planification (XLSX, PDF). Chaque fichier chiffré reçoit une signature numérique FARDC invisible.
+#### 2. Mode "Panne Fantôme" (Anti-Forensics)
+Pour maximiser la confusion, le module peut opérer par corruption incrémentale :
+ * Dégradation lente : Chiffrement de 1% des données par heure.
+ * Effet psychologique : L'ennemi diagnostique d'abord une défaillance matérielle (Bad sectors) ou un bug logiciel, retardant la réponse cyber de plusieurs jours.
+#### 3. Réversion (Kill-Switch)
+Une fois que les troupes au sol ont pris le contrôle des infrastructures ennemies, le Commandant peut activer la fonction RESTORE. Le système injecte alors la clé stockée dans le chain_sealer.py pour rendre les serveurs à nouveau opérationnels au profit des forces amies.
+### Valeur opérationnelle (FARDC)
+ * Neutralisation du Ravitaillement : Un ennemi qui ne connaît plus l'état de ses stocks de munitions est un ennemi incapable de soutenir un assaut.
+ * Chaos Organisationnel : La paralysie des plannings de transport bloque les rotations de troupes et les évacuations.
+ * Capture d'Infrastructure : Permet de rendre inutilisables les systèmes adverses pendant la bataille, tout en se réservant la possibilité de les récupérer intacts après la victoire.
+## 🏁 Bilan de l'Arsenal Offensif Souverain
+Le système Combat-Ready-SIGINT dispose désormais d'une capacité d'action multi-domaine :
+| Domaine | Arme | Effet Tactique |
+|---|---|---|
+| Finances | mitm_engine.py | Redirection des fonds et saisie souveraine. |
+| Infrastructures | tactical_ransom.py | Paralysie logistique et déni d'accès. |
+| Gouvernance | chain_sealer.py | Audit immuable et intégrité des opérations. |
+| Psychologie | psyops_notifier.py | Démoralisation et rupture des chaînes de confiance. |
+### Indicateurs CCC (Commandant Control Center)
+ * Indicateur d'Immobilisation : Affiche en temps réel le pourcentage de la structure ennemie paralysée (ex: "Logistique ennemie : 94% inaccessible").
+ * Statut de Clé : Confirme que la clé de déchiffrement est sécurisée dans la BlackBox avant le lancement de l'attaque.
+Le manuel opérationnel complet est désormais validé. 
