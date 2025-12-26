@@ -363,3 +363,18 @@ Le système Combat-Ready-SIGINT dispose désormais d'une capacité d'action mult
  * Indicateur d'Immobilisation : Affiche en temps réel le pourcentage de la structure ennemie paralysée (ex: "Logistique ennemie : 94% inaccessible").
  * Statut de Clé : Confirme que la clé de déchiffrement est sécurisée dans la BlackBox avant le lancement de l'attaque.
 Le manuel opérationnel complet est désormais validé. 
+
+
+# Manuel_Off_Fin.md (Mise à jour Finale)
+## 🛡️ Sécurité de l'Arme et Réversion
+### Dépendance Critique à l'Audit
+Le TacticalRansomware est techniquement lié au module ChainSealer. Aucun chiffrement ne peut débuter si la clé n'a pas été préalablement scellée dans le registre d'audit. Cette mesure garantit que l'État-Major garde toujours la main sur l'infrastructure ennemie capturée.
+### Indicateurs de Paralysie au CCC
+Le Commandant peut suivre l'efficacité de l'immobilisation via le Tableau de Bord Tactique :
+ * Progression de la Paralysie : Visualisation en temps réel du nombre de fichiers verrouillés sur les serveurs cibles.
+ * Gestion du Kill-Switch : Activation du bouton RESTORE uniquement après validation biométrique, permettant de transformer instantanément une infrastructure ennemie paralysée en un outil logistique pour les forces amies (FARDC).
+## 🏁 Fin du Manuel Opérationnel
+Ce manuel constitue la doctrine officielle pour l'usage des capacités numériques offensives souveraines. L'arsenal est désormais complet :
+ * FINANCES : Saisie et Redirection (mitm_engine, auto_seizure).
+ * INFRASTRUCTURES : Immobilisation et Neutralisation (tactical_ransom).
+ * AUDIT : Traçabilité et Immuabilité (chain_sealer).
