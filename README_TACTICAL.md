@@ -1,36 +1,41 @@
-# 🛡️ SRC - Système de Renseignement de Combat v1.0
-Unité de Capacité Offensive Numérique Souveraine (FARDC)
-> Classification : SECRET DÉFENSE
-> Usage : Forces Armées de la République Démocratique du Congo
-> Description : Plateforme intégrée de SIGINT, BFT et Cyber-Offensive pour la supériorité informationnelle sur le théâtre d'opérations.
-> 
-## 🚀 Vue d'Ensemble
-Le système SRC (Sentinel-Alpha) fusionne le renseignement électronique passif avec des capacités d'action directe sur les infrastructures adverses. Il permet de passer instantanément de la détection à la neutralisation.
-## 🛠️ Capacités Majeures
-### 1. SIGINT & Identité (Observation)
- * Interception Multimodale : Capture COMINT/ELINT via SDR (Software Defined Radio).
- * Identity Resolver : Corrélation temps réel entre adresses IP et identités IMSI via sondes GGSN/PGW.
- * BFT (Blue Force Tracking) : Géolocalisation des unités amies et marquage des menaces sur carte tactique.
-### 2. Offensive Financière (Action)
- * Saisie Conservatoire : Détournement des flux financiers (Mobile Money/Banques) vers le compte souverain.
- * National Switch Hook : Filtrage massif des transactions via le protocole ISO 8583.
- * Crypto-De-anonymization : Identification des portefeuilles Bitcoin/ETH liés à des activités suspectes.
-### 3. Offensive Infrastructure (Paralysie)
- * Tactical Ransom : Immobilisation des bases de données logistiques ennemies par chiffrement AES-256 GCM.
- * SCADA Disruptor : Coupure ciblée de l'alimentation des antennes télécoms et infrastructures critiques.
- * Anti-Forensics : Dissimulation des traces d'intrusion par manipulation des journaux système (Syslog/EventLog).
-## 🏗️ Architecture Technique
-Le système repose sur une architecture hybride Kotlin/Python assurant robustesse et agilité :
- * Core (Kotlin/Java) : Moteur décisionnel, validation PKI (Gatekeeper) et gestion de l'audit immuable.
- * Vectors (Python) : Modules offensifs spécialisés utilisant Scapy, NetfilterQueue et Pymodbus.
- * Security : Scellement cryptographique des logs (WORM) et protection par double signature.
-📋 Protocole de Mise en Service
- * Initialisation : Lancer le script de raccordement réseau ./scripts/connect_switch.sh.
- * Authentification : Insertion des jetons matériels (Yubikey) par l'Officier EM et le Magistrat.
- * Engagement : Activation des vecteurs via le Tactical Dashboard.
-## ⚠️ Avertissement Légal
-L'utilisation de ce système est strictement réservée au cadre des opérations de défense nationale. Toute action offensive doit faire l'objet d'une autorisation formelle enregistrée dans la "Boîte Noire" d'audit immuable.
-🏁 État du Dépôt
- * Version : v1.0.0 (Sentinel-Alpha)
- * Branche Stable : main
- * Audit : Validé (ComplianceMatrix-OK)
+# 🛡️ Project Sovereign Core (PSC)
+Système Intégré de Renseignement Technique & d'Action Offensive
+PSC est une plateforme de défense de nouvelle génération conçue pour la République Démocratique du Congo. Elle fusionne le renseignement électronique (SIGINT), le suivi tactique (BFT) et la supériorité numérique offensive (Cyber/Finance).
+## 🚀 Capacités Stratégiques Majeures
+### 1. 📡 Renseignement & Tactique (Plan Bleu)
+ * SIGINT Multimodal : Interception et analyse du spectre radio (COMINT/ELINT).
+ * Identity Resolver : Corrélation en temps réel entre les identités radios (IMSI/IMEI) et les activités numériques (IP).
+ * BFT (Blue Force Tracking) : Visualisation cartographique des forces amies et détection des menaces sur le théâtre d'opérations.
+### 2. 💸 Souveraineté Financière (Plan Gris)
+ * Saisie Conservatoire Numérique : Interception et redirection automatique des flux financiers suspects (Mobile Money, Banques) vers les comptes de récupération de l'État.
+ * Crypto-Linker : Levée de l'anonymat sur les transactions Blockchain par corrélation avec les métadonnées SIGINT.
+ * Asphyxie Économique : Gel instantané des portefeuilles numériques de groupes armés identifiés.
+### 3. ⚡ Supériorité Offensive (Plan Rouge)
+ * Action Réseau : Man-in-the-Middle (MitM) tactique, injection BGP et neutralisation d'infrastructures critiques.
+ * Sabotage Numérique : "Panne Fantôme", désinformation (Spoofing) et chiffrement tactique des bases de données adverses.
+ * Intervention SCADA : Capacité de coupure sélective de l'énergie et des télécoms en zone de conflit.
+## 🏛️ Gouvernance & Audit : "La Boîte Noire"
+Le système PSC est régi par une architecture de confiance inviolable :
+ * Audit Immuable (WORM) : Chaque action offensive est scellée par hachage cryptographique lié. Toute modification du passé corrompt la chaîne, alertant immédiatement le haut commandement.
+ * Double Verrouillage PKI : L'activation des modules offensifs nécessite la signature conjointe de l'Opérateur Technique et d'un Magistrat Militaire.
+ * Transparence Juridique : Génération automatique de rapports certifiés pour servir de preuve devant les instances internationales.
+### 🛠️ Structure du Projet
+├── 📂 build/libs/          # Noyau compilé (sigint-core-all.jar)
+├── 📂 core/                # Renseignement technique (Identity Resolver)
+├── 📂 data/                # Coffre-fort (Clés PKI, Journaux d'Audit)
+├── 📂 scripts/             # Scripts d'activation tactique (IPTables, Tunneling)
+├── 📂 src/main/kotlin/     # Cœur de contrôle PKI & Bridge
+└── 📂 vectors/             # Arsenal offensif (Saisie financière, Infra, SCADA)
+
+### ⚙️ Installation Rapide (Combat Ready)
+ * Générer les certificats de souveraineté :
+   openssl req -x509 -newkey rsa:4096 -keyout data/keys/state_private.key -out data/keys/state_auth.crt -nodes -days 3650
+
+ * Compiler le noyau :
+   ./gradlew shadowJar
+
+ * Lancer la mission :
+   sudo ./run_all.sh
+
+Développé pour la défense de la souveraineté nationale. 🇨🇩
+Ce projet est strictement réservé à un usage institutionnel sous mandat de l'État-Major.
