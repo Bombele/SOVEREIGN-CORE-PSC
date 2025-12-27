@@ -6,6 +6,12 @@ plugins {
 group = "com.fardc.sigint"
 version = "1.0-SNAPSHOT"
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
 repositories {
     mavenCentral()
 }
@@ -15,7 +21,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 }
 
-// Correction des lignes 34-37 (Compatibilité Gradle 8.2 / Java 17)
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions {
         jvmTarget = "17"
@@ -24,10 +29,15 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     }
 }
 
-tasks.shadowJar {
-    archiveBaseName.set("sigint-core")
-    archiveClassifier.set("all")
+tasks.withType<Jar> {
     manifest {
         attributes["Main-Class"] = "com.fardc.sigint.core.MainKt"
     }
+}
+
+tasks.named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
+    archiveBaseName.set("sigint-core")
+    archiveClassifier.set("all")
+    archiveVersion.set("") // évite les suffixes de version dans le nom du JAR
+    mergeServiceFiles() // utile si tu as des META-INF/services
 }
