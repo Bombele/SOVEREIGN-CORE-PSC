@@ -1,44 +1,29 @@
-# 🛡️ Makefile SOVEREIGN-CORE-PSC
-# Orchestration tactique du moteur souverain
+# Configuration FARDC - SOVEREIGN-CORE-PSC
+KOTLINC = ./kotlinc/bin/kotlinc
+JAR_FILE = build/libs/sigint-core-all.jar
+MAIN_CLASS = com.fardc.sigint.core.MainKt
 
-GRADLEW=./gradlew
-JAR=build/libs/sigint-core-all.jar
-TARGET=127.0.0.1
+all: setup compile run
 
-.PHONY: build verify launch audit stress clean lock
-
-## 🔧 Compilation du noyau
-build:
-	$(GRADLEW) clean shadowJar --no-daemon
-
-## 🛡️ Vérification du JAR
-verify:
-	@if [ -f "$(JAR)" ]; then \
-		echo "✔️ JAR détecté : $(JAR)"; \
-	else \
-		echo "❌ Erreur : JAR non généré"; exit 1; \
+setup:
+	@echo "🛡️ Configuration de l'environnement..."
+	@mkdir -p build/libs
+	@if [ ! -f "$(KOTLINC)" ]; then \
+		curl -L https://github.com/JetBrains/kotlin/releases/download/v1.9.0/kotlin-compiler-1.9.0.zip -o kotlinc.zip && \
+		unzip -qo kotlinc.zip && rm kotlinc.zip; \
 	fi
 
-## 🚀 Lancement du noyau
-launch: build verify
-	java -jar $(JAR)
+compile:
+	@echo "⚙️ Compilation du noyau (Bypass 25.0.1)..."
+	@export JAVA_HOME=$(JAVA_HOME_17_X64) && \
+	$(KOTLINC) src/main/kotlin/com/fardc/sigint/core/*.kt \
+		-jdk-home "$$JAVA_HOME" \
+		-include-runtime -d $(JAR_FILE)
 
-## 🔍 Audit des ports ouverts
-audit: build verify
-	java -jar $(JAR) --audit $(TARGET)
+run:
+	@echo "🚀 Lancement du système SIGINT..."
+	@java -jar $(JAR_FILE)
 
-## 💥 Test de résilience (stress test)
-stress: build verify
-	java -jar $(JAR) --stress $(TARGET)
-
-## 🧹 Nettoyage
 clean:
-	rm -rf build/libs/*.jar
-
-## 🔒 Verrouillage Gradle 8.2
-lock:
-	rm -rf gradle gradlew gradlew.bat .gradle
-	gradle wrapper --gradle-version 8.2 --distribution-type bin
-	chmod +x gradlew
-	$(GRADLEW) -v | grep "Gradle 8.2" || \
-		(echo "❌ Gradle 8.2 non détecté"; exit 1)
+	rm -rf build/
+	rm -rf kotlinc/
