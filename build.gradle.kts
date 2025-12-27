@@ -1,10 +1,10 @@
 plugins {
-    kotlin("jvm") version "2.3.0"
+    kotlin("jvm") version "2.3.0" // Version compatible Gradle 9
     id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
-group = "com.fardc.sigint"
-version = "1.0-OFFICIAL"
+group = "me.bombele"
+version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -12,16 +12,17 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
+    // Ajoute tes dépendances spécifiques ici
 }
 
-kotlin {
-    jvmToolchain(17)
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions.jvmTarget = "17" // Obligatoire pour Gradle 9
 }
 
 tasks.shadowJar {
-    archiveBaseName.set("sigint-core")
+    archiveBaseName.set("sovereign-core")
     archiveClassifier.set("all")
-    manifest {
-        attributes["Main-Class"] = "com.fardc.sigint.core.MainKt"
-    }
+    
+    // Correction pour Gradle 9 : Forcer la reproductibilité
+    isZip64 = true
 }
